@@ -105,6 +105,7 @@ BaseFN='meas_MID543_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_4min_FID30394';
 MIDStr=BaseFN(6:11);
 FN=[ScanP BaseFN '.dat'];
 % sdfdsf
+% again
 %%
 WhichE=2;
 
