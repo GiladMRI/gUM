@@ -25,12 +25,26 @@ X=reshape(Q.gene_GEN_L010_PixelwiseMultC_weightC,[128 128 size(Q.gene_GEN_L010_P
 % X=reshape(Q.gene_GEN_L006_PixelswiseMult_weightC,[128 128 7]);
 Y=X./X(:,:,1);
 % ShowAbsAngle(Y)
-ShowAbsAngle(X)
-subplot(1,2,1);
-title('Channels/Time-segments? collapes layer')
+figure;
+ha = tight_subplot(1,2,[0.01 0.000],[.01 .01],[.01 .01]);
+%           for ii = 1:6; axes(ha(ii)); plot(randn(10,ii)); end
+%           set(ha(1:4),'XTickLabel',''); set(ha,'YTickLabel','')
+axes(ha(1));
+gmontage(abs(X),'Size',[7 1])
+axes(ha(2));
+gmontage(angle(X),'Size',[7 1])
+% title('Channels/Time-segments? collapes layer')
 xlabel(VP(end-32:end-28))
 %%
-
+X1=CombineDims(X,[3 1]);
+X2=cat(3,abs(X1)/0.03,(angle(X1)+pi)/(2*pi));
+X3=CombineDims(X2,[3 2]);
+fgmontage(X3);axis equal
+%%
+X1=CombineDims(gflip(X(:,:,1:4),1),[3 2]);
+X2=cat(3,abs(X1)/0.03,(angle(X1)+pi)/(2*pi));
+X3=CombineDims(X2,[3 1]);
+fgmontage(X3);axis equal
 %%
 X=reshape(Q.gene_GEN_L007_PixelwiseMultC_weightC,[128 128 7 8 12]);
 %%
@@ -46,14 +60,32 @@ BaseP=St.RealDataFN(1:end-17);
 S=load([BaseP 'SensCC1.mat']);
 B=load([BaseP 'B0TS.mat']);
 T=load([BaseP 'TSBF_TSC_Sens.mat']);
-T2=load([BaseP 'TrajAndRealData.mat']);
+% T2=load([BaseP 'TrajAndRealData.mat']);
+T3=load([St.RealDataFN(1:end-23) 'Traj.mat']);
 %%
 F=64/56;
 fgmontage(grmss(X,3:5)); hold on;
-plot(T2.BARTTrajAct(1,:)*F+64.5,T2.BARTTrajAct(2,:)*F+64.5,'.')
+% plot(T2.BARTTrajAct(1,:)*F+64.5,T2.BARTTrajAct(2,:)*F+64.5,'.')
+plot(T3.BARTTrajMS(1,:)*F+64.5,T3.BARTTrajMS(2,:)*F+64.5,'.')
 title('Regrid rms weight and trajectory')
 axis equal
 % plot(-T2.BARTTrajAct(1,:)*F+64.5,-T2.BARTTrajAct(2,:)*F+64.5,'r')
 % plot(T2.BARTTrajAct(2,:)*F+64.5,T2.BARTTrajAct(1,:)*F+64.5,'m')
 % plot(-T2.BARTTrajAct(2,:)*F+64.5,-T2.BARTTrajAct(1,:)*F+64.5,'y')
 % plot([1,2],[1,2],'r')
+%%
+figure;
+subplot(1,2,1);
+gmontage(grmss(X,3:5)); hold on;
+plot(T3.BARTTrajMS(1,:)*F+64.5,T3.BARTTrajMS(2,:)*F+64.5,'.')
+title('Regrid rms weight and trajectory')
+axis equal
+subplot(1,2,2);
+gmontage(X3);axis equal
+
+savefig('FigWeights.fig')
+gprint(get(gcf,'Number'),'FigWeights',[]) 
+print('FigWeights','-deps');
+close(gcf);
+clear Q
+save('FigWeights.mat');

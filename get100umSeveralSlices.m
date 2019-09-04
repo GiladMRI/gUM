@@ -1,0 +1,26 @@
+QQ=loadniidata('/autofs/cluster/kawin/Gilad/acquired_FA25.nii');
+%%
+Ax=rot90(QQ(:,:,250:100:end-200));
+fgmontage(Ax);
+%%
+Sag=perm31(QQ(350:100:end-300,:,:));
+fgmontage(Sag);
+%%
+Cor=rot90(perm32(QQ(:,150:100:end-100,:)),3);
+fgmontage(Cor);
+%%
+clear QQ
+QQ=loadniidata('/autofs/cluster/kawin/Gilad/synthesized_FLASH25.nii');
+%%
+sAx=rot90(QQ(:,:,250:100:end-200));
+fgmontage(sAx);
+%%
+sSag=perm31(QQ(350:100:end-300,:,:));
+fgmontage(sSag);
+%%
+sCor=rot90(perm32(QQ(:,150:100:end-100,:)),3);
+fgmontage(sCor);
+%%
+save('/autofs/cluster/kawin/Gilad/Slices100um.mat','Ax','Cor','Sag','sAx','sCor','sSag')
+save('/autofs/cluster/kawin/Gilad/Slices100um_Acq.mat','Ax','Cor','Sag')
+save('/autofs/cluster/kawin/Gilad/Slices100um_Syn.mat','sAx','sCor','sSag')

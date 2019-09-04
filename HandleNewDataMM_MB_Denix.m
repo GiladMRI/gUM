@@ -1,72 +1,15 @@
-FN='/home/a/SpiralData/27Apr18/meas_MID80_gSpiral_BOLD_1Sli_1Rep_1Shot_VD10_6ADCs_25_125_FID15656.dat';
-FN='/home/a/SpiralData/27Apr18/meas_MID78_gSpiral_BOLD_1Sli_1Rep_1Shot_VD13_6ADCs_25_125_FID15654.dat';
-FN='/home/a/SpiralData/27Apr18/meas_MID85_gSpiral_BOLD_1Sli_1Rep_2Shot_VD10_4ADCs_25_125_FID15660.dat';
-FN='/home/a/SpiralData/27Apr18/meas_MID87_gSpiral_BOLD_1Sli_4Rep_2Shot_VD10_4ADCs_25_125_FID15662.dat';
 
-FN='/media/a/DATA1/13May18/Phantom/meas_MID364_gBP_VD11_U19_FID17753.dat';
-FN='/media/a/DATA1/13May18/Phantom/meas_MID366_gBP_VD11_U10_FID17755.dat';
-FN='/media/a/DATA1/13May18/Me/meas_MID407_gBP_VD11_U10_FID17796.dat';
-FN='/media/a/DATA1/13May18/Me/meas_MID405_gBP_VD11_U19_FID17794.dat';
-FN='/media/a/DATA1/13May18/Me/meas_MID417_gBP_VD15_U20_FID17806.dat';
-FN='/media/a/DATA1/13May18/Me/meas_MID426_gBP_VD11_U19_A35S155_FID17815.dat';
-FN='/media/a/DATA1/13May18/Me/meas_MID409_gBP_VD11_U19_7ADCs_FID17798.dat';
+ScanP='/autofs/cluster/kawin/Gilad/SkopeTest-10-04-19/';
+% RefFldMapP='/media/a/ec52f4a8-12c2-4a24-9e6f-d65aaa410529/Deni/27Aug_Data/meas_MID446_BP_fieldmap_5echosX_FID28384/';
+BaseFN='meas_MID363_gBP_ep2d_bold_multiecho_ASL_SMS_Spi_FID46893 (another copy)';
 
-% FN='/media/a/DATA/14May18/Ben/meas_MID107_gBP_VD11_U19_FID17942.dat';
 
-FN='/media/a/DATA/14May18/Ben/meas_MID109_gBP_VD11_U19_4min_FID17944.dat';
 
-ScanP='/media/a/DATA/13May18/Me/';
-BaseFN='meas_MID409_gBP_VD11_U19_7ADCs_FID17798';
-RefFldMapP='/media/a/DATA/13May18/Me/meas_MID399_BP_fieldmap_4echos_FID17788/';
-
-% ScanP='/media/a/DATA/14May18/Ben/';
-% BaseFN='meas_MID111_gBP_VD11_U19_G35S155_FID17946';
-% BaseFN='meas_MID109_gBP_VD11_U19_4min_FID17944';
-% RefFldMapP='/media/a/DATA/14May18/Ben/meas_MID123_BP_fieldmap_5echosX_FID17958/';
-% 
-% BaseP='/media/a/DATA/180628_AK/';
-% ScanP='/media/a/DATA/180628_AK/';
-% RefFldMapP='/media/a/DATA/180628_AK/meas_MID265_BP_fieldmap_5echosX_FID22460/';
-% BaseFN='meas_MID244_gBP_VD11_U19_G35S155_4min_FID22439';
-
-ScanP='/media/a/DATA/11Jul18/RL/';
-BaseFN='meas_MID149_gBP_VD11_U19_G35S155_FID23846';
-RefFldMapP='/media/a/DATA/11Jul18/RL/meas_MID141_BP_fieldmap_5echosX_FID23838/';
-
-% ScanP='/media/a/DATA/PhantomCAIPI/';
-% RefFldMapP='/media/a/DATA/PhantomCAIPI/meas_MID330_BP_fieldmap_5echosX_FID24027/';
-% BaseFN='meas_MID342_gBP_Spi_12Sli_MB2_FID24036';
-% BaseFN='meas_MID344_gBP_Spi_12Sli_MB2_Cs36_FID24038';
-
-ScanP='/media/a/DATA/ASLSubjData/S04/';
-BaseFN='meas_MID149_gBP_VD11_U19_G35S155_FID23846';
-RefFldMapP='/media/a/DATA/ASLSubjData/S04/meas_MID141_BP_fieldmap_5echosX_FID23838/';
-% BaseFN='meas_MID164_gBP_VD11_U27_G35S155_2ADCs_FID23861';
-
-% ScanP='/media/a/DATA/ASLSubjData/S03/';
-% BaseFN='meas_MID244_gBP_VD11_U19_G35S155_4min_FID22439';
-% RefFldMapP='/media/a/DATA/ASLSubjData/S03/meas_MID265_BP_fieldmap_5echosX_FID22460/';
-
-% ScanP='/media/a/DATA/ASLSubjData/S02/';
-% BaseFN='meas_MID109_gBP_VD11_U19_4min_FID17944';
-% RefFldMapP='/media/a/DATA/ASLSubjData/S02/meas_MID123_BP_fieldmap_5echosX_FID17958/';
-
-% ScanP='/media/a/DATA/ASLSubjData/S01/';
-% BaseFN='meas_MID409_gBP_VD11_U19_7ADCs_FID17798';
-% RefFldMapP='/media/a/DATA/ASLSubjData/S01/meas_MID399_BP_fieldmap_4echos_FID17788/';
-
-ScanP='/media/a/DATA/FC/';
-% BaseFN='meas_MID203_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_OutInOut_FID24589';
-RefFldMapP='/media/a/DATA/FC/meas_MID197_BP_fieldmap_5echosX_FID24583/';
-BaseFN='meas_MID199_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_MB_CAIPI36_FID24585';
-
-ScanP='/media/a/DATA/DI_AK_ObliqueMBOutInOut/';
-BaseFN='meas_MID169_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_FID25539';
-RefFldMapP='/media/a/DATA/DI_AK_ObliqueMBOutInOut/meas_MID167_BP_fieldmap_5echosX_FID25537/';
-
+MIDStr=BaseFN(6:11);
 FN=[ScanP BaseFN '.dat'];
 %%
 mkdir([ScanP BaseFN]);
+system(['sudo chmod +777 -R ' ScanP BaseFN]);
 %% Read raw
 AData = mapVBVD(FN);
 % ADataI=AData.image();
@@ -77,7 +20,7 @@ ADataIx=AData.image(:,:,:,:,:,3,:,:,:,:,:,:,:);
 ADataIsL=squeeze(ADataIx);
 
 for i=1:numel(AData.hdr.Phoenix.sSliceArray.asSlice)
-    SLoc(i,1)=AData.hdr.Phoenix.sSliceArray.asSlice{i}.sPosition.dSag;
+    %SLoc(i,1)=AData.hdr.Phoenix.sSliceArray.asSlice{i}.sPosition.dSag;
     SLoc(i,2)=AData.hdr.Phoenix.sSliceArray.asSlice{i}.sPosition.dCor;
     SLoc(i,3)=AData.hdr.Phoenix.sSliceArray.asSlice{i}.sPosition.dTra;
 end
@@ -87,7 +30,8 @@ if(iscell(asSlice(1)))
     asSlice=[AData.hdr.Phoenix.sSliceArray.asSlice{:}];
 end
 
-nSlices=numel(asSlice);
+nSlices=numel(AData.hdr.Phoenix.sSliceArray.asSlice);
+% nSlices=numel(asSlice);
 for s=1:nSlices
     try
         SlbLoc(1,s)=asSlice(s).sPosition.dSag;
@@ -110,7 +54,7 @@ RotMat = transpose(Quat2RotMat(AData.image.slicePos(4:7, 100)));
 RotatedLocs=RotMat.'*SlbLoc;
 
 
-nSlices=numel(AData.hdr.Phoenix.sSliceArray.asSlice);
+% nSlices=numel(AData.hdr.Phoenix.sSliceArray.asSlice);
 % Ord=[1:2:nSlices 2:2:nSlices];
 Ord=[2:2:nSlices 1:2:nSlices];
 [~,ROrd]=sort(Ord);
@@ -121,17 +65,21 @@ dFOV=FOVx/1000;
 
 paramLongROSamples = AData.hdr.MeasYaps.sWiPMemBlock.alFree{20};
 spBW =AData.hdr.MeasYaps.sWiPMemBlock.adFree{13};
+spBW =AData.hdr.MeasYaps.sWiPMemBlock.adFree{14};
 AccR =AData.hdr.MeasYaps.sWiPMemBlock.adFree{6};
 paramLongInterleaves =AData.hdr.MeasYaps.sWiPMemBlock.adFree{8};
+paramLongInterleaves =AData.hdr.MeasYaps.sWiPMemBlock.adFree{10};
 VD =AData.hdr.MeasYaps.sWiPMemBlock.adFree{5};
-paramLongSpGradAmp =AData.hdr.MeasYaps.sWiPMemBlock.adFree{11};
-paramLongSpSlewRate =AData.hdr.MeasYaps.sWiPMemBlock.adFree{10};
+paramLongSpGradAmp =AData.hdr.MeasYaps.sWiPMemBlock.adFree{12};
+paramLongSpSlewRate =AData.hdr.MeasYaps.sWiPMemBlock.adFree{11};
 MB=AData.hdr.MeasYaps.sWiPMemBlock.alFree{9};
 
 CAIPISep_mm=AData.hdr.MeasYaps.sWiPMemBlock.adFree{7};
 CAIPIPeriod_us=AData.hdr.MeasYaps.sWiPMemBlock.adFree{8};
 CAIPIDelay_us=AData.hdr.MeasYaps.sWiPMemBlock.adFree{9};
 % MB
+nSlicesNoMB=nSlices/MB;
+
 % if(MB>1)
 if(isempty(spBW))
     spBW =AData.hdr.MeasYaps.sWiPMemBlock.adFree{14};
@@ -141,6 +89,21 @@ if(isempty(spBW))
 end
 disp('Read data');
 %%
+SummaryStr.MB=MB;
+SummaryStr.paramLongSpGradAmp=paramLongSpGradAmp;
+SummaryStr.paramLongSpSlewRate=paramLongSpSlewRate;
+SummaryStr.paramLongROSamples =paramLongROSamples;
+SummaryStr.spBW=spBW;
+SummaryStr.AccR=AccR;
+SummaryStr.paramLongInterleaves=paramLongInterleaves;
+SummaryStr.VD=VD;
+
+if(MB>1)
+    SummaryStr.CAIPISep_mm=CAIPISep_mm;
+    SummaryStr.CAIPIPeriod_us=CAIPIPeriod_us;
+    SummaryStr.CAIPIDelay_us=CAIPIDelay_us;
+end
+%%
 save([ScanP BaseFN filesep 'Data.mat'],'ADataIsL','AData');
 disp(['Saved ' [ScanP BaseFN filesep 'Data.mat']]);
 %%
@@ -149,7 +112,7 @@ disp(['Saved ' [ScanP BaseFN filesep 'Data.mat']]);
 % OutInOut=false;
 OutInOut=paramLongROSamples>9000;
 if(OutInOut)
-    [kTraj, BaseRes, GradBuf, MaxGrad]=VDSpiralMex([dFOV,paramLongROSamples/3,spBW,AccR,...
+    [kTraj, BaseRes, GradBuf, MaxGrad]=VDSpiralMex([dFOV,paramLongROSamples/2,spBW,AccR,...
     paramLongInterleaves,VD,paramLongSpGradAmp,paramLongSpSlewRate,1]);
 else
     [kTraj, BaseRes, GradBuf, MaxGrad]=VDSpiralMex([dFOV,paramLongROSamples,spBW,AccR,...
@@ -161,12 +124,16 @@ CAIPIVec=CAIPIBlips([paramLongSpGradAmp, paramLongSpSlewRate,CAIPISep_mm,CAIPIDe
 
 WhichE=1;
 if(OutInOut)
-    BaseLen=size(kTraj,1)/3;
-    WhichE=2;
+%     BaseLen=size(kTraj,1)/3;
+    BaseLen=size(kTraj,1);
     TrajIdxs=(1:BaseLen)+BaseLen*(WhichE-1);
-    kTraj=kTraj(TrajIdxs,:);
-    GradBuf=GradBuf(TrajIdxs,:);
+%     kTraj=kTraj(TrajIdxs,:);
+%     GradBuf=GradBuf(TrajIdxs,:);
+%     
+    CAIPIVec=CAIPIVec(TrajIdxs,:);
 end
+
+gamma=42.5774806;
 
 EffMaxRes=sqrt(sum(((kTraj(end,:))*FOVx/2/pi/1000).^2))*2;
 
@@ -174,6 +141,46 @@ clear kTrajQ
 kTrajQ(:,1) = interp1(1:size(kTraj,1),kTraj(:,1),1:1e5/spBW:(size(kTraj,1)-0.01));
 kTrajQ(:,2) = interp1(1:size(kTraj,1),kTraj(:,2),1:1e5/spBW:(size(kTraj,1)-0.01));
 
+cCAIPIVec=cumsum(CAIPIVec)*gamma*10*2*pi/1e6;
+% cCAIPIVecX=interp1(1:numel(cCAIPIVec),cCAIPIVec,1:1e5/spBW:numel(cCAIPIVec));
+
+%% Perparing for comparison to measured trajectory
+OrigTraj=[kTraj cCAIPIVec*1000];
+for i=1:3
+    OrigTrajQ(:,i)=interp1(1:size(OrigTraj,1),OrigTraj(:,i),1:1e5/spBW:(size(OrigTraj,1)-0.0001));
+end
+
+%% Here we look for starting point
+StartPoint=241.5;
+RFPoints=10*(0:1e5/spBW:size(OrigTraj,1)-1.001);
+clear IData
+for i=1:3
+    IData(:,i)=interp1(1:size(RData3,1),RData3(:,i),StartPoint+(RFPoints));
+end
+ChannelsToFlip=[1 3];
+
+
+IData(:,ChannelsToFlip)=-IData(:,ChannelsToFlip);
+% Showing with exaggerated CAIPI blips
+MidKz=max(abs(OrigTrajQ(:,3)))/2;
+OrigTrajQX=OrigTrajQ;
+OrigTrajQX(:,3)=(OrigTrajQX(:,3)-MidKz)*20;
+
+IDataX=IData;
+IDataX(:,3)=(IDataX(:,3)-MidKz)*20;
+XsToShow=1:1000;
+XsToShow=1:size(OrigTrajQ,1);
+figure;
+plot(OrigTrajQX(XsToShow,:));hold on;
+plot(IDataX(XsToShow,:),'--');
+setXaxis([1 XsToShow(end)]);
+title('Planned (solid) and measured (dashed) tajectory (after rotation optimization)');
+%% Now we replace the designed with the measured, for the rest of the recon
+kTrajQ=IData(:,1:2);
+cCAIPIVecX=IData(:,3)/1000;
+
+cCAIPIVecY=cCAIPIVecX(3:end);
+%%
 BARTTrajx=kTrajQ.'*FOVx/1000/2/pi;
 BARTTrajx(3,end)=0;
 
@@ -190,13 +197,18 @@ disp('ok 1');
 MaxK=max(BARTTrajMS(:));
 nTraj=size(BARTTrajMS,2);
 Acc=ceil(MaxK*2).^2/nTraj;
+XResmm=dFOV*1000/(2*MaxK);
 figure;subplot(2,2,1);
 plot(BARTTrajMS(1,:),BARTTrajMS(2,:),'.')
 setXaxis([-1.1 1.1]*ceil(MaxK));
+
 setYaxis([-1.1 1.1]*ceil(MaxK));
-title(['MaxK=' num2str(MaxK) ' #Traj=' num2str(nTraj) ' Acc=' num2str(Acc)]);
+title(['MaxK=' num2str(MaxK) ' #Traj=' num2str(nTraj) ' Acc=' num2str(Acc) ]);
+xlabel(['Res ' num2str(XResmm,'%.2f') 'mm']);
+ylabel(['Nominal acc: ' num2str(AccR) ' VD=' num2str(VD)]);
+
 subplot(2,2,2);
-plot(GradBuf*MaxGrad*1000);title(['Grad, max=' num2str(MaxGrad*1000,'%.2f') 'mT/m'])
+plot(GradBuf*MaxGrad*1000);title(['                Grad, max=' num2str(MaxGrad*1000,'%.2f') 'mT/m'])
 SlewBuf=diff(GradBuf*MaxGrad*1000,[],1);
 hold on;
 plot(CAIPIVec,'k');
@@ -211,6 +223,17 @@ gprint(get(gcf,'Number'),[ScanP BaseFN filesep 'Traj'],[])
 close(gcf);
 save([ScanP BaseFN filesep 'Traj.mat'],'BARTTrajMS');
 disp('Saved traj fig');
+%% Summary P2
+SummaryStr.MaxK=MaxK;
+SummaryStr.nTraj=nTraj;
+SummaryStr.Acc=Acc;
+SummaryStr.XResmm=XResmm;
+SummaryStr.nSlices=nSlices;
+
+
+fileName = ['Summary_' BaseFN(6:11) '.txt'];
+gStruct2txt(SummaryStr,[ScanP BaseFN filesep fileName]);
+disp('Saved summary txt');
 %%
 Trajm2=BARTTrajMS(1:2,1:end-2);
 Sz128=[128 128];
@@ -263,71 +286,36 @@ disp('ok');
 ADataIsP=double(permute(ADataIsL,[1 5 2 3 4]));
 nReps=size( ADataIsP,5);
 nChannels=size( ADataIsP,3);
-%
+
 try
     dx=AData.hdr.Phoenix.sSliceArray.asSlice{1}.sPosition.dSag/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dReadoutFOV;
 catch
     disp('No x shift!');
     dx=0;
 end
-% dy=-15;
-% dy=-45;
-% read_raw=1;
 
 dx=RotatedLocs(2,1)/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dReadoutFOV;
 
 kx=BARTTrajMS(1,:)*2*pi;
 ky=BARTTrajMS(2,:)*2*pi;
-% modx=double(exp(1i*(dx*kx+dy*ky))');
 
+dy=RotatedLocs(1,1)/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
+modx=double(exp(1i*(dx*kx+dy*ky))');
 
-% ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
-% if(OutInOut)
-%     nReps=3;
-%     ADataIsPx=PartitionDim(ADataIsPx(:,:,:,1),1,3);
-% end
-% ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
-% 
-% ADataIsPy=RepDotMult(ADataIsPy,modx);
-
-IsOblique=isfield(AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal,'dCor');
-
-IsOblique=false;
-if(~IsOblique)
-%     dy=AData.hdr.Phoenix.sSliceArray.asSlice{1}.sPosition.dCor/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
-    dy=RotatedLocs(1,1)/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
-    modx=double(exp(1i*(dx*kx+dy*ky))');
-    
-    ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
-    if(OutInOut)
-        nReps=3;
-        ADataIsPx=PartitionDim(ADataIsPx(:,:,:,1),1,3);
-    end
-    ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
-    
-    ADataIsPy=RepDotMult(ADataIsPy,modx);
-else
-    Vnor=[AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal.dCor AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal.dTra];
-    Vpar=[Vnor(2) -Vnor(1)].';
-    for s=1:nSlices
-        Vpos=[AData.hdr.Phoenix.sSliceArray.asSlice{s}.sPosition.dCor AData.hdr.Phoenix.sSliceArray.asSlice{s}.sPosition.dTra];
-        dyS(s)=Vpos*Vpar/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
-        modxS(s,:)=double(exp(1i*(dx*kx+dyS(s)*ky))');
-    end
-    ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
-    if(OutInOut)
-        nReps=3;
-        ADataIsPx=PartitionDim(ADataIsPx(:,:,:,1),1,3);
-    end
-    ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
-    
-%     ADataIsPy=ADataIsPy.*permute(modxS,[2 3 1 4]);
+ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
+if(OutInOut)
+    ADataIsPx=PartitionDim(ADataIsPx,1,3);
+    ADataIsPx=ADataIsPx(:,:,:,:,WhichE);
 end
+ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
+
+ADataIsPy=RepDotMult(ADataIsPy,modx);
 
 % clear ADataIsPx ADataIsP ADataIx ADataIsL
-disp('ok a')
+disp('ok b')
 %%
 SliI=6;
+SliIs=[SliI SliI+nSlicesNoMB];
 %%
 nukData=ADataIsPy(:,:,SliI,1).';
 
@@ -337,7 +325,6 @@ TimeInMs2=(0:nTraj-1)*2.5/1e3;
 T2SCompStr='';
 T2SEstMs=20;
 T2SEstDecay=exp(-TimeInMs2/T2SEstMs);
-% T2SEstComp=exp(TimeInMs2/T2SEstMs);
 
 Sz2=gsize(SensX,1:2);
 
@@ -415,17 +402,16 @@ gmontage(Rec);title('BART recon');
 ylabel(YLbl);
 
 subplot(2,2,2);
-gmontage(Mg(:,:,SliI));title('FieldMap 1st echo mag');
+gmontage(Mg(:,:,SliIs));title('FieldMap 1st echo mag');colorbar
 subplot(2,2,3);
-gmontage(SensX(:,:,:,1,SliI));title('Fieldmap sens');
+gmontage(SensX(:,:,:,1,SliIs));title('Fieldmap sens');colorbar
 subplot(2,2,4);
-gmontage(B0Q2(:,:,SliI),[-300 300]);title('Fieldmap B0 Hz');colorbar
+gmontage(B0Q2(:,:,SliIs),[-300 300]);title('Fieldmap B0 Hz');colorbar
 %%
 gprint(get(gcf,'Number'),[ScanP BaseFN filesep YLbl '_Params'],[]) 
 close(gcf);
 disp(['printed fig to file' [ScanP BaseFN filesep YLbl '_Params']]);
-
-%%
+%% Run BART on all slices
 Lambda=1e-5;
 for SliI=1:nSlices
     disp(['--- Sli #' num2str(SliI) ' --- ' datestr(now)]);
@@ -448,7 +434,7 @@ disp('Finished BART No b0 all slices');
 fgmontage(RecS)
 gprint(get(gcf,'Number'),[ScanP BaseFN filesep 'BARTRecon_AllS_NoB0_W' num2str(Lambda) T2SCompStr],[]) 
 close(gcf);
-save([ScanP BaseFN filesep 'BARTRecon_AllS_NoB0_W' num2str(Lambda) T2SCompStr '.mat'],'RecS');
+save([ScanP filesep 'BARTRecon_AllS_NoB0_W' num2str(Lambda) T2SCompStr '.mat'],'RecS');
 
 fgmontage(RecSMM)
 gprint(get(gcf,'Number'),[ScanP BaseFN filesep 'BARTRecon2Maps_AllS_NoB0_W' num2str(Lambda) T2SCompStr],[]) 
@@ -456,11 +442,10 @@ close(gcf);
 save([ScanP BaseFN filesep 'BARTRecon2Maps_AllS_NoB0_W' num2str(Lambda) T2SCompStr '.mat'],'RecSMM');
 %%
 SliI=6;
+SliIs=[SliI SliI+nSlicesNoMB];
 %% All B0 effects across time
 % Mgc=imresizeBySlices(gflip(Mg(:,:,SliI+6),1:2),Sz2);
 % Mgc=imresizeBySlices(Mg(:,:,SliI+6),Sz2);
-nSlicesNoMB=nSlices/MB;
-SliIs=[SliI SliI+nSlicesNoMB];
 Mgc=imresizeBySlices(Mg(:,:,SliIs),Sz2);
 Mskc=Mgc>7e-5;
 MskcE=imdilate(imfillholesBySlices(Mskc),strel('disk',5,8));
@@ -485,7 +470,7 @@ B0M2(~MskcE)=0;
 % B0M2=-B0M2;
 % B0M2(B0M2>150)=-20;
 % fgmontage(B0M2)
-disp('ok');
+disp('ok Loaded B0 from field map');
 %%
 % B0M2=B0RealEx;
 [U_TimeInMs2, IA_TimeInMs2, IB_TimeInMs2]=unique(TimeInMs2);
@@ -500,7 +485,7 @@ WE=Col(MgcN);
 
 WeightedE=WE.*E;
 
-disp('ok a');
+disp('ok Prepared for calculating time-segments for band A');
 %% Fessler time segmentation
 % nTS=7;
 clear TSC TSB
@@ -527,8 +512,10 @@ nTS=11;
 %     end
 % end
 % figure(87234);clf;plot(log10(ErrTS),'-*')
+disp('ok Calculated time-segments for band A');
 %%
 CurB=2;
+
 AllB0C=exp(1i*2*pi*RepDotMult(B0M2(:,:,CurB),gpermute(TimeInMs2(IA_TimeInMs2)/1000,[3 2])));  % exp(1i*2*pi*(TimeInMs2/1000)*B0M2);
 E=reshape(AllB0C,prod(Sz2),nU_TimeInMs2);
 MgcN=Mgc(:,:,CurB)./grmss(Mgc(:,:,CurB));
@@ -537,7 +524,7 @@ WE=Col(MgcN);
 
 WeightedE=WE.*E;
 
-disp('ok a');
+disp('ok Prepared for calculating time-segments for band B');
 %% Fessler time segmentation
 % nTS=7;
 clear ErrTS
@@ -562,21 +549,23 @@ TS_Thresh=1e-5;
 %     end
 % end
 % figure(87234);clf;plot(log10(ErrTS),'-*')
-%% GPU TS
-gamma=42.5774806;
-cCAIPIVec=cumsum(CAIPIVec)*gamma*10*2*pi/1e6;
-cCAIPIVecX=interp1(1:numel(cCAIPIVec),cCAIPIVec,1:1/4:numel(cCAIPIVec));
-cCAIPIVecY=cCAIPIVecX(3:end-1);
-% cCAIPIVecZ=exp(1i*cCAIPIVecY.*(SLoc(SliIs)'));
+disp('ok Prepared for calculated time-segments for band B TSC(:,:,:,2)');
+%%
+fgmontage(angle(TSC));
+title('Time-segments: Phase evolution along the acquisition period');
+gprint(get(gcf,'Number'),[ScanP BaseFN filesep YLbl 'TS'],[]) 
+close(gcf);
+%%
+SliIP=[ScanP BaseFN filesep YLbl filesep];
+mkdir(SliIP);
+save([SliIP 'TSBF_TSC_Sens.mat'],'TSBF','TSC','Sens');
+disp(['Saved ' SliIP 'TSBF_TSC_Sens.mat']);
+%% Calculate the image-to-signal operator, uses TS, on GPU (NYU's gpuNUFFT)
 cCAIPIVecZ=exp(1i*cCAIPIVecY.*(RotatedLocs(3,SliIs)'));
 % Sens=imresizeBySlices( squeeze(SensP2),Sz2);
 osf = 2; % oversampling: 1.5 1.25
 wg = 3; % kernel width: 5 7
 sw = 8; % parallel sectors' width: 12 16
-
-% TSC_MB=ones([NTrg1 1 nBands]);
-
-% GOP_MCSMBMS = ggpuNUFT_TS_MC_MB_MS(BARTTrajMS(:,:,1:nShots),NTrg1,osf,wg,sw,ones(1,size(BARTTrajMS,2),nBands),TSC_MB,SensX(:,:,:,SliI));
 
 NTrg1=Sz2;
 nBands=MB;
@@ -588,172 +577,509 @@ end
 Sens=squeeze(SensX(:,:,:,1,SliIs));
 
 cCAIPIVecZMod=cCAIPIVecZ;
-% cCAIPIVecZMod=cCAIPIVecZ.*conj(modxS(SliIs,3:end));
-% cCAIPIVecZMod=cCAIPIVecZ.*(modxS(SliIs,3:end));
 
-% GOP_MCSMBMS = ggpuNUFT_TS_MC_MB_MS_CAIPI(BARTTrajAct,NTrg1,osf,wg,sw,TSBF,TSC,Sens,cCAIPIVecZ);
 GOP_MCSMBMS = ggpuNUFT_TS_MC_MB_MS_CAIPI(BARTTrajAct,NTrg1,osf,wg,sw,TSBF,TSC,Sens,cCAIPIVecZMod);
 GOP_MC=GOP_MCSMBMS;
 nTrajP2=nU_TimeInMs2;
 disp('ok');
-%%
-SliIP=[ScanP BaseFN filesep YLbl filesep];
-mkdir(SliIP);
-save([SliIP 'TSBF_TSC_Sens.mat'],'TSBF','TSC','Sens');
-disp(['Saved ' SliIP 'TSBF_TSC_Sens.mat']);
-%%
+%% Testing the operator
 % GOP_MC = ggpuNUFT_TS_MCx(BARTTraj2,Sz2,osf,wg,sw,TSB(IB_TimeInMs2,:).',TSC,Sens);
 x = randn([Sz2 MB]) + 1j*randn([Sz2 MB]);
 y = randn([size(Sens,3) nTrajP2]) + 1j*randn([size(Sens,3) nTrajP2]);
 Ax = GOP_MC*x;
 Aty = GOP_MC'*y;
 Out=abs(x(:)'*Aty(:) - conj(y(:)'*Ax(:)))
-%%
-% T2SCompStr='_T2S20Comp';
-%%
+if(abs(Out)>1e-3)
+    disp('Operator error?');
+end
+%% SparseMRI reconstruction by jumping between data and image
 % if(nShots==1)
     TVOP=TVOP_MSlice;
 % else
 %     TVOP=TVOP_MTC_W([1 1 0 1e1]);
 % end
-% TVOP=Wavelet;
-% XFM=1;
-% XFM = Wavelet('Daubechies',4,4);	% Wavelet
-% XFM = Wavelet('Daubechies_TI',4,4);	% Wavelet
-
-nukData=ADataIsPy(:,:,SliI,3).';
-nukData=nukData(:,3:end);
-% nukData=nukData.*T2SEstComp;
+WhichReps=3;
+WhichReps=1:nReps;
+for WhichRep=WhichReps
+    disp(WhichRep);
+    nukData=ADataIsPy(:,:,SliI,WhichRep).';
+    nukData=nukData(:,3:end);
     
-DataP=nukData;
-
-% QQ=load('/media/a/H1/TFTSNUFTOut.mat');
-% WithTSBR=double(QQ.Out)/100;
-% DataP=WithTSBR.';
-
-AOdd = GOP_MCSMBMS;
-% AOdd = GOP_MC;
-
-% TVW=0.1;
-TVW=1e-7;
-
-
-% filterType:   string, 'Haar', 'Beylkin', 'Coiflet', 'Daubechies','Symmlet', 'Vaidyanathan','Battle'
-% Use suffix _TI for translation invariance, for example, 'Daubechies_TI'
-% filterSize: related to the support and vanishing moments of the particular wavelet (See MakeONFilter in wavelab)
-% wavScale: 	scallest scale of wavelet decomposition
-
-XFMStr='Daubechies';
-
-filterSize=4;
-wavScale=4;
-
-if(strcmp(XFMStr,'None'))
-    XFM=1;
-    xfmWeight=0;
-else
-    XFM = Wavelet(XFMStr,filterSize,wavScale);
-    xfmWeight = 1e-7;	% Weight for Transform L1 penalty
-end
-
-
-param=ExtendStruct(struct('pNorm',1,'TVWeight',TVW,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',TVOP,'xfmWeight',xfmWeight),init);
-
-% XFM=SubSpaceOp(V,SdT,1);
-% xfmWeight=1e-1;
-% % param=ExtendStruct(struct('pNorm',2,'TVWeight',TVW,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',TVOP,'xfmWeight',xfmWeight),init);
-% % param=ExtendStruct(struct('pNorm',2,'TVWeight',0,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',1,'xfmWeight',xfmWeight),init);
-% param=ExtendStruct(struct('pNorm',2,'TVWeight',0.01,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',TVOP,'xfmWeight',xfmWeight),init);
-
-
-param.data =     DataP;
-
-nfnlCgIters=40;
-RunFnlViewAmp=1;
-res=zeros([Sz2 MB]);
-if(nShots>1)
-    res=repmat(resA,[1 1 1 nShots]);
-    res=res+randn(size(res))*max(abs(resA(:)))/20;
-end
-
-FigH=4000;
-figure(FigH);close(FigH);
-
-if(~isfield(param,'ShowFig'))
-    param.ShowFig=true;
-end
-StartTime_fnl=now;
-param.Verbose=false;
-% res=double(MLN*grmss(im_resA)/grmss(MLN));
-% res=im_resA;
-% res=XFM*double(MLN*grmss(im_resA)/grmss(MLN));
-% res=XFM*im_resA;
-clear ObjConv Score
-for n=1:nfnlCgIters
-% for n=1:2
-%     disp([Slis WhichRep n]);
-    [res, CurObj] = fnlCg(res,param);
-%     res=repmat(mean(res,4),[1 1 1 2]);
-    ObjConv(n)=CurObj;
-%     (ObjConv(end)-ObjConv(end-1))*2/(ObjConv(end)+ObjConv(end-1))
-    im_res = param.XFM'*res;
-%     figure(FigH), gmontage(abs(gflip(im_res,1))), drawnow;% title(qq)\
-%     Score(n)=grmss(CurMBMSIs-im_res);
-    if(param.ShowFig)
-        figure(FigH); subplot(1,3,1);
-        gmontage(abs(gflip(im_res,[]))); drawnow;% title(qq)
-        cx=caxis;
-        caxis(cx/RunFnlViewAmp);
-        subplot(1,3,2);
-        gmontage(angle(gflip(im_res,[]))); drawnow;% title(qq)
-        subplot(1,3,3);
-        plot(ObjConv);setYaxis([0 CurObj*3]);if(n>1), setXaxis([1 n]);end
-        
-%         subplot(2,3,4);
-%         gmontage(abs(CurMBMSIs-im_res),[-100 100]);
-        
-%         if(nShots>1)
-%             subplot(2,3,5);
-%             gmontage(RepDotMult(Msks(:,:,1:nBands),abs(cat(4, diff(CurMBMSIs,[],4),diff(im_res,[],4)))),[-100 100]);
-%         end
-        
-%         subplot(2,3,6);
-%         plot(Score);setYaxis([0 Score(n)*3]);if(n>1), setXaxis([1 n]);end
-    end
-%     t=toc;
-    if(n>1)
-        dObjP=(ObjConv(n-1)-CurObj)/ObjConv(n-1);
-        disp(['Iter #' num2str(n,'%02d') ' ' datestr(now) ' ' num2str(CurObj,'%5.3g') ' dObjP ' num2str(dObjP,'%g')]);
-        if(dObjP<2e-3)
-            disp('Not advancing. Stopping.');
-            break;
-        end
+    DataP=nukData;
+    
+    
+    AOdd = GOP_MCSMBMS;
+    
+    TVW=1e-7;
+    
+    % filterType:   string, 'Haar', 'Beylkin', 'Coiflet', 'Daubechies','Symmlet', 'Vaidyanathan','Battle'
+    % Use suffix _TI for translation invariance, for example, 'Daubechies_TI'
+    % filterSize: related to the support and vanishing moments of the particular wavelet (See MakeONFilter in wavelab)
+    % wavScale: 	scallest scale of wavelet decomposition
+    
+    XFMStr='Daubechies';
+    
+    filterSize=4;
+    wavScale=4;
+    
+    if(strcmp(XFMStr,'None'))
+        XFM=1;
+        xfmWeight=0;
     else
-        disp(['Iter #' num2str(n,'%02d') ' ' datestr(now) ' ' num2str(CurObj,'%5.3g')]);
+        XFM = Wavelet(XFMStr,filterSize,wavScale);
+        xfmWeight = 1e-7;	% Weight for Transform L1 penalty
     end
     
-    if(nShots==1)
-        resA=res;
+    
+    param=ExtendStruct(struct('pNorm',1,'TVWeight',TVW,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',TVOP,'xfmWeight',xfmWeight),init);
+    
+    % XFM=SubSpaceOp(V,SdT,1);
+    % xfmWeight=1e-1;
+    % % param=ExtendStruct(struct('pNorm',2,'TVWeight',TVW,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',TVOP,'xfmWeight',xfmWeight),init);
+    % % param=ExtendStruct(struct('pNorm',2,'TVWeight',0,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',1,'xfmWeight',xfmWeight),init);
+    % param=ExtendStruct(struct('pNorm',2,'TVWeight',0.01,'Itnlim',8,'FT',AOdd,'Verbose',false,'XFM',XFM,'TV',TVOP,'xfmWeight',xfmWeight),init);
+    
+    
+    param.data =     DataP;
+    
+    param.ShowFig=false;
+    
+    nfnlCgIters=40;
+    RunFnlViewAmp=1;
+    res=zeros([Sz2 MB]);
+    if(nShots>1)
+        res=repmat(resA,[1 1 1 nShots]);
+        res=res+randn(size(res))*max(abs(resA(:)))/20;
     end
+    
+    FigH=4000;
+    if(param.ShowFig)
+        figure(FigH);close(FigH);
+    end
+    
+    if(~isfield(param,'ShowFig'))
+        param.ShowFig=true;
+    end
+    StartTime_fnl=now;
+    param.Verbose=false;
+    clear ObjConv Score
+    for n=1:nfnlCgIters
+        [res, CurObj] = fnlCg(res,param);
+        ObjConv(n)=CurObj;
+        im_res = param.XFM'*res;
+        if(param.ShowFig)
+            figure(FigH); subplot(1,3,1);
+            gmontage(abs(gflip(im_res,[]))); drawnow;% title(qq)
+            cx=caxis;
+            caxis(cx/RunFnlViewAmp);
+            subplot(1,3,2);
+            gmontage(angle(gflip(im_res,[]))); drawnow;% title(qq)
+            subplot(1,3,3);
+            plot(ObjConv);setYaxis([0 CurObj*3]);if(n>1), setXaxis([1 n]);end
+            
+        end
+        if(n>1)
+            dObjP=(ObjConv(n-1)-CurObj)/ObjConv(n-1);
+            disp(['Iter #' num2str(n,'%02d') ' ' datestr(now) ' ' num2str(CurObj,'%5.3g') ' dObjP ' num2str(dObjP,'%g')]);
+            if(dObjP<2e-3)
+                disp('Not advancing. Stopping.');
+                break;
+            end
+        else
+            disp(['Iter #' num2str(n,'%02d') ' ' datestr(now) ' ' num2str(CurObj,'%5.3g')]);
+        end
+        
+        if(nShots==1)
+            resA=res;
+        end
+    end
+    if(param.ShowFig)
+        close(FigH);
+    end
+    disp('ok im_res');
+    
+    % ImResR(:,:,SliI,r)=im_res(:,:,1);
+    % ImResR(:,:,SliI+nSlicesNoMB,r)=im_res(:,:,2);
+    
+    ImResR(:,:,SliIs,WhichRep)=im_res;
 end
-
-disp('ok im_res');
-
-fgmontage(im_res,[0 7e-3]);
 %%
+fgmontage(im_res,[0 7e-3]);
+
 XFMStrFull=['[' XFMStr ',' num2str(filterSize) ',' num2str(wavScale) ',' num2str(xfmWeight) ']'];
-%     XFMStr ' Size=' num2str(filterSize) ' Scale=' num2str(wavScale) ' W=' num2str(xfmWeight)
 XLbl=['L' num2str(param.pNorm) ',TVW=' num2str(param.TVWeight) ',' XFMStrFull ];
 xlabel(XLbl)
 YLbl=['Sli' num2str(SliI,'%02d')];
 ylabel(YLbl);
-
+%%
 gprint(get(gcf,'Number'),[ScanP BaseFN filesep YLbl '_' XLbl T2SCompStr],[]) 
 close(gcf);
 save([ScanP BaseFN filesep YLbl '_' XLbl T2SCompStr '.mat'],'im_res');
 disp(['Saved ' ScanP BaseFN filesep YLbl '_' XLbl T2SCompStr '.mat']);
 %%
 DataP2=double(permute(DataP,[3 2 1]));
+
+nukData=ADataIsPy(:,:,SliI,1).';
+nukData=nukData(:,3:end);
+%%
+[U,S,sccmtx] = svd(nukData.','econ');
+ncc=16; % Maybe need more for MB?
+
+% nMapsToUse=size(SensX,4);
+nMapsToUse=1;
+
+CurSens=SensX(:,:,:,1:nMapsToUse,SliIs);
+
+SensCC=permute(MultMatTensor(sccmtx(:,1:ncc).',permute(CurSens,[3 1 2 4 5])),[2 3 1 4 5]);
+
+DataCC=(sccmtx(:,1:ncc).'*nukData);
+DataPCC=double(permute(DataCC,[3 2 1]));
+disp('Applied coil compression to this slice(s)');
+%% Clean save
+WhichRep=3;
+nukData=ADataIsPy(:,:,SliI,WhichRep).';
+nukData=nukData(:,3:end);
+
+DataP=nukData;
+DataP2=double(permute(DataP,[3 2 1]));
+
+    
+% BaseOutLoc='/media/a/DATA/';
+SensMsk=single(grmss(SensCC(:,:,:),3)>0.01);
+
+SensCCA=SensCC(:,:,:,1,1);
+SensCCB=SensCC(:,:,:,1,2);
+SensMskA=single(grmss(SensCCA(:,:,:),3)>0.01);
+SensMskB=single(grmss(SensCCB(:,:,:),3)>0.01);
+
+TSBFA=TSBF(:,:,1).*cCAIPIVecZ(1,:);
+TSBFB=TSBF(:,:,2).*cCAIPIVecZ(2,:);
+TSCA=TSC(:,:,:,1);
+TSCB=TSC(:,:,:,2);
+
+CurOurP=[ScanP BaseFN filesep];
+mkdir(CurOurP);
+CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
+mkdir(CurOurPSli);
+save([CurOurPSli 'Sens.mat'],'CurSens');
+save([CurOurPSli 'SensCC.mat'],'SensCC','sccmtx','SensMsk');
+save([CurOurPSli 'SensCC1.mat'],'SensCCA','SensCCB','sccmtx','SensMskA','SensMskB');
+save([CurOurPSli 'B0TS.mat'],'TSBFA','TSBFB','TSB','TSCA','TSCB','osf','wg','sw','Mgc','TimeInMs2');
+save([CurOurPSli 'TrajAndRealData.mat'],'BARTTrajAct','DataP2','DataPCC');
+disp('Saved');
+%%
+tmp=squeeze(DataPCC);
+% RealDataFac=grmss(AllData(5656:34:6767,:,:))/grmss(tmp)
+RealDataFac=100;
+CurIDataV=Row(tmp)*RealDataFac;
+CurIDataVR=[real(CurIDataV) imag(CurIDataV)];
+
+  
+BatchSizeInNN=12;
+Data=repmat(single(CurIDataVR),[BatchSizeInNN 1]);
+RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
+save(RealDataFN,'Data');
+disp('Saved real data');
+%% At this point ready for TF
+%% Call TF
+% pause(60*60*11);
+CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
+
+%     ParamsSDefaults=getParamsStructFromFN('/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RegridTry3C2_7TS_RL_S3__2018-07-16_15-19-07_train/');
+ParamsSDefaults=getParamsStructFromFN('/home/deni/TF/srez/RegridTry3C2_7TS_S02_Sli01__2018-07-23_09-40-59_train/');
+ParamsS=ParamsSDefaults;
+ParamsS.SessionNameBase=['RegridTry3C2_7TS_' MIDStr '_Sli' num2str(SliI,'%02d')];
+
+ParamsS.RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
+ParamsS.BaseTSDataP=CurOurPSli;
+ParamsS.BaseNUFTDataP=[ScanP BaseFN filesep];
+
+ParamsS.DasasetMatFN='/home/deni/HCPData_256x256_int16.mat';
+ParamsS.nToLoad=10000;
+
+% Parames for MB:
+ParamsS.nccInData=ncc;
+ParamsS.InputMode='RegridTry3FMB';
+ParamsS.NetMode='RegridTry3C2_TS_MB';
+
+% To change and decide
+ParamsS.nccToUse=16;    %13
+ParamsS.nNeighbors=12;  %12
+ParamsS.nTimeSegments=11; %11
+
+
+ParamsS.learning_rate_start=0.002;
+ParamsS.learning_rate_half_life=30;
+ParamsS.train_time=180;
+ParamsS.batch_size=BatchSizeInNN;
+ParamsS.WL2_Lambda=0;
+
+ParamsS.RandomPhaseLinearFac=3;
+ParamsS.RandomPhaseQuadraticFac=0.05;
+ParamsS.RandomPhaseScaleFac=2;
+
+ParamsS.checkpoint_period=20;
+
+%     Txt=gStruct2txt(ParamsS,'~/HomeA/TF/Params.txt');
+Txt=gStruct2txt(ParamsS,'~/TF/Params.txt');
+
+%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+system('sudo /home/deni/RunTFForMatlabx.sh');
+% /home/deni/TF/srez/RegridTry3C2_7TS_g18_Sli06__2018-08-16_12-35-57_train
+% gSendMail('Subject',Txt,Image FileName,EmailAddr)
+%% Run on all repetitions (save all repetitions' data before)
+
+% The network before trained and is on the following folder:
+TrainedNetP='/home/deni/TF/srez/RegridTry3C2_7TS_MID448_Sli06__2018-09-17_09-37-02_checkpoint';
+St=ParamsS;
+St.LoadAndRunOnData=1;
+St.LoadAndRunOnData_checkpointP=TrainedNetP;
+St.LoadAndRunOnData_Prefix=[ScanP BaseFN filesep 'RealData' filesep 'Sli' num2str(SliI) '_r'];
+St.LoadAndRunOnData_OutP=[ScanP BaseFN filesep 'RealDataOut' filesep 'Sli' num2str(SliI,'%02d') filesep];
+Txt=gStruct2txt(St,'~/TF/Params.txt');
+
+system('sudo /home/deni/RunTFForMatlabx.sh');
+
+    % disp('Prepared Params');
+    %
+%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+%     system('sudo /home/deni/RunTFForMatlabx.sh');
+% end
+%% Read NN output all reps
+% NNOutP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/meas_MID488_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_4min_FID26056/RealDataOut/Sli06/';
+NNOutP=St.LoadAndRunOnData_OutP;
+D=dir([NNOutP '*.mat']);
+for r=1:numel(D)
+    tmp=load([NNOutP D(r).name]);
+    NNRec(:,:,r)=double(squeeze(tmp.x(1,:,:,1))+1i*squeeze(tmp.x(1,:,:,2)));
+end
+%%
+MEven=NNRec(:,:,2:2:end);
+MOdd=NNRec(:,:,1:2:end);
+Perf=abs(MEven)-abs(MOdd);
+MPerf=mean(Perf,3);
+SPerf=std(Perf,0,3);
+tSNR_Perf=MPerf./SPerf;
+
+TMsk1=tSNR_Perf>0.3;
+TMsk1(:,[1:10 50:138 188:256])=0;
+TwoD=Reshape4d22d(permute(Perf,[1 2 4 3]),TMsk1);
+%%
+%% Now Multislice, mostly ok
+WhichSlices=nSlicesNoMB:-1:1
+%% Multi slice (in MB)
+for SliI=WhichSlices
+    SliIs=[SliI SliI+nSlicesNoMB];
+
+    nukData=ADataIsPy(:,:,SliI,1).';
+    nukData=nukData(:,3:end);
+
+    [U,S,sccmtx] = svd(nukData.','econ');
+    
+    sccmtxS(:,:,SliI)=sccmtx;
+    
+    ncc=16;
+
+    for b=1:nBands
+        CurSens=SensX(:,:,:,1,SliIs(b));
+        SensCC=permute(MultMatTensor(sccmtx(:,1:ncc).',permute(CurSens,[3 1 2 4])),[2 3 1 4]);
+        SensCCS(:,:,:,:,SliIs(b))=SensCC;
+    end
+end
+disp('SensCCS ok');
+%%
+for SliI=WhichSlices
+    CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
+    mkdir(CurOurPSli);
+    
+    nukData=ADataIsPy(:,:,SliI,1).';
+    nukData=nukData(:,3:end);
+    
+    DataCC=(sccmtxS(:,1:ncc,SliI).'*nukData);
+    
+    DataPCC=double(permute(DataCC,[3 2 1]));
+    
+    tmp=squeeze(DataPCC);
+%     RealDataFacS(SliI)=grmss(AllData(5656:34:6767,:,:))/grmss(tmp);
+    CurIDataV=Row(tmp)*100; %*RealDataFacS(SliI); % Change by Echo! WhichE
+    CurIDataVR=[real(CurIDataV) imag(CurIDataV)];
+    
+    Data=repmat(single(CurIDataVR),[12 1]);
+    RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
+    save(RealDataFN,'Data');
+end
+disp('Save slices real data for NN');
+% save([BaseOutLoc BaseFN filesep 'RealDataFacS.mat'],'RealDataFacS');
+%% All reps
+CurRealDataP=[ScanP BaseFN filesep 'RealData' filesep];
+mkdir(CurRealDataP);
+for SliI=WhichSlices
+    for r=1:nReps
+        disp([SliI r]);
+        nukData=ADataIsPy(:,:,SliI,r).';
+        nukData=nukData(:,3:end);
+        nukDataCC=MultMatTensor(sccmtxS(:,1:ncc,SliI).',nukData);
+        
+        CurIDataV=Row(nukDataCC.')*200; % *RealDataFac;
+        CurIDataVR=[real(CurIDataV) imag(CurIDataV)];
+        
+        Data=repmat(single(CurIDataVR),[12 1]);
+        RealDataFN=[CurRealDataP 'Sli' num2str(SliI) '_r' num2str(r,'%02d') '.mat'];
+        %     RealDataFN=['/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RealData/b_Ben14May_Sli5_r' num2str(r,'%02d') '.mat'];
+        save(RealDataFN,'Data');
+    end
+end
+disp('Saved slices real data for NN all reps');
+
+CurRealDataOutP=[ScanP BaseFN filesep 'RealDataOut' filesep];
+mkdir(CurRealDataOutP);
+for SliI=WhichSlices
+    mkdir([CurRealDataOutP 'Sli' num2str(SliI,'%02d')]);
+end
+%% Prepare for TS calculations
+MgcS=imresizeBySlices(Mg,Sz2);
+MskcS=MgcS>7e-5;
+
+MskcSE=imdilate(imfillholesBySlices(MskcS),strel('disk',5,8));
+B0M2S=B0Q2;
+B0M2S(~MskcSE)=0;
+
+WhichSlices=nSlices:-1:1;
+%%
+clear TSBS TSCS
+%%
+nTS=11;
+for SliI=WhichSlices
+    B0M2=B0M2S(:,:,SliI);
+    Mgc=MgcS(:,:,SliI);
+    
+    Mskc=Mgc>7e-5;
+    MskcE=imdilate(imfill(Mskc,'holes'),strel('disk',5,8));
+    B0M2(~MskcE)=0;
+    
+    AllB0C=exp(1i*2*pi*RepDotMult(B0M2,gpermute(TimeInMs2(IA_TimeInMs2)/1000,[3 2])));  % exp(1i*2*pi*(TimeInMs2/1000)*B0M2);
+    E=reshape(AllB0C,prod(Sz2),nU_TimeInMs2);
+    MgcN=Mgc./grmss(Mgc);
+    WE=Col(MgcN);
+    % WE=Col(MgcN)*0+1;
+    WeightedE=WE.*E;
+    
+    % Fessler time segmentation
+    clear ErrTS
+    TS_Thresh=1e-5;
+        FesTimePoints=linspace(0,TimeInMs2(end)/1000,nTS);
+        TSC=exp(1i*2*pi*RepDotMult(B0M2,gpermute(FesTimePoints,[3 2])));  % exp(1i*2*pi*(TimeInMs2/1000)*B0M2);
+        TSC2=reshape(TSC,prod(Sz2),nTS);
+        WTSC2=WE.*TSC2;
+        TSB=(WeightedE.')/(WTSC2.');% W in both sides
+
+        CurErrTS=grmss(WeightedE-WTSC2*(TSB.')); %include W
+        ErrTSS(nTS,SliI)=CurErrTS;
+
+        disp([datestr(now) ' Sli #' num2str(SliI) ' nTS ' num2str(nTS) ' err=' num2str(CurErrTS)]);
+    TSBS(:,:,SliI)=TSB;
+    TSCS(:,:,:,SliI)=TSC;
+end
+disp('ok TSBS TSCS');
+%%
+% load([ScanP BaseFN filesep 'TSBS_TSCS.mat'])
+save([ScanP BaseFN filesep 'TSBS_TSCS.mat'],'TSBS','TSCS','ErrTSS');
+disp('Saved TSBS TSCS');
+%%
+%% Prepare memory for results of BART
+RecTSAll=NaN([gsize(SensCC,1:2) MB nSlicesNoMB nReps]);
+%% BART TS try: To do after having coil compression matrices, B0 correction matrices for all slices
+setenv('TOOLBOX_PATH','/media/a/ec52f4a8-12c2-4a24-9e6f-d65aaa410529/Gilad/bart-0.4.03TS')
+
+WhichRepsToRun=1:nReps;
+% WhichRepsToRun=11;
+
+WhichSliIToRun=1:nSlicesNoMB;
+% WhichSliIToRun=6;
+
+% SliI=6;
+
+for SliI=WhichSliIToRun
+SliIs=[SliI SliI+nSlicesNoMB];
+
+% RepToRun=11;
+for RepToRun=WhichRepsToRun
+nukData=ADataIsPy(:,:,SliI,RepToRun).';
+nukData=nukData(:,3:end);
+
+sccmtxBoth = sccmtxS(:,:,SliI);
+nScc=16;
+    
+% SensFCCBoth(:,:,:,1) = CC(squeeze(SensX(:,:,:,1,SliIs(1))),sccmtxBoth(:,1:nScc));
+% SensFCCBoth(:,:,:,2) = CC(squeeze(SensX(:,:,:,1,SliIs(2))),sccmtxBoth(:,1:nScc));
+SensFCCBoth=squeeze(SensCCS(:,:,:,:,SliIs));
+
+DataCC=CC(permute(nukData,[3 2 1]),sccmtxBoth(:,1:nScc));
+nukDataP=permute(DataCC,[3 1 4 2]);
+
+nBands=MB;
+% SliIsx=1:2;
+% TSBFA=permute(TSBF(:,:,SliIsx),[4 2 6 5 3 1]);
+TSBFA=permute(TSBS(:,:,SliIs),[4 1 6 5 3 2]);
+
+TSBFAm=repmat(TSBFA,[1 1 1 nScc 1 1 1 1 1]);
+% TSBFAm=TSBFAm*0+1;
+TSBFAm=TSBFAm.*permute(cCAIPIVecZMod,[3 2 4 5 1 6]);
+
+TSBFm=TSBFAm;
+TSBFm=TSBFm/nTS;
+writecfl('/tmp/TSB',TSBFm);
+
+TSCToUse=TSCS(:,:,:,SliIs);
+% TSCToUse=TSC;
+% TSCToUse=TSCToUse*0+1;
+
+SensP=permute(SensFCCBoth,[1 2 5 3 4]);
+SensW=SensP.*permute(TSCToUse(:,:,:,:),[1 2 5 6 4 3])*nTS;
+
+TrajW=repmat(BARTTrajAct,[1 1 1 nScc 2 nTS]);
+
+
+disp(datestr(now));
+% RecTS=bart(['pics -S -m -R W:3:0:' num2str(1e-5) ' -t'],TrajW, nukDataP, SensW);
+RecTS=bart(['pics -S -m -R T:3:3:' num2str(1e-8) ' -t'],TrajW, nukDataP, SensW);
+disp(datestr(now));
+RecTSAll(:,:,:,SliI,RepToRun)=RecTS;
+end
+end
+fgmontage(RecTS);title('BART TS')
+save([ScanP BaseFN filesep 'RecTSAll_Echo' num2str(WhichE) '.mat'],'RecTSAll');
+%% End BART TS Try
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%
+% pause(60*60*11);
+for SliI=WhichSlices
+    CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
+
+    ParamsSDefaults=getParamsStructFromFN('/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RegridTry3C2_7TS_RL_S3__2018-07-16_15-19-07_train/');
+    ParamsS=ParamsSDefaults;
+    ParamsS.SessionNameBase=['RegridTry3C2_7TS_' ScanP(end-3:end-1) '_Sli' num2str(SliI,'%02d')];
+    ParamsS.RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
+    ParamsS.BaseTSDataP=CurOurPSli;
+    ParamsS.BaseNUFTDataP=[ScanP BaseFN filesep];
+    Txt=gStruct2txt(ParamsS,'~/HomeA/TF/Params.txt');
+    
+    system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+end
+
 %% ESPIRIT
 GOP2=gpuNUFFT(BART2Fes_NUFT_Idxs(BARTTrajAct,Sz2)'/(2*pi),ones(nTrajP2,1),osf,wg,sw,Sz2,double(TSC));
 GOP_TS=ggpuNUFT_TS(GOP2,double(TSBF));
@@ -763,6 +1089,7 @@ CurSens=SensX(:,:,:,:,SliI);
 weights=ones(gsize(CurSens,[1 2 4]));
 ESP = ESPIRiT(CurSens,weights);
 
+DataP2=double(permute(DataP,[3 2 1]));
 disp('ok');
 %%
 XOP = Wavelet('Daubechies_TI',4,6);
@@ -789,22 +1116,6 @@ disp('ok cgL1ESPIRiT');
 % save([ScanP BaseFN filesep YLbl '_L1ESPIRiT_B0_lam' num2str(lam) T2SCompStr '.mat'],'resL1ESPIRiT1');
 % disp(['Saved ' ScanP BaseFN filesep YLbl '_L1ESPIRiT_B0_lam' num2str(lam) T2SCompStr '.mat']);
 %%
-nukData=ADataIsPy(:,:,SliI,1).';
-nukData=nukData(:,3:end);
-%%
-[U,S,sccmtx] = svd(nukData.','econ');
-ncc=13;
-
-nMapsToUse=size(SensX,4);
-nMapsToUse=1;
-
-CurSens=SensX(:,:,:,1:nMapsToUse,SliIs);
-SensCC=permute(MultMatTensor(sccmtx(:,1:ncc).',permute(CurSens,[3 1 2 4 5])),[2 3 1 4 5]);
-
-DataCC=(sccmtx(:,1:ncc).'*nukData);
-DataPCC=double(permute(DataCC,[3 2 1]));
-%%
-
 weights=ones(gsize(CurSens,[1 2 4]));
 ESP = ESPIRiT(CurSens,weights);
 
@@ -817,7 +1128,9 @@ GOP_TS_ESPCC=ggpuNUFT_TS_MCnosum(GOP_TS,[1 1 ncc]);
 
 
     
+DataCC=(sccmtx(:,1:ncc).'*nukData);
 
+DataPCC=double(permute(DataCC,[3 2 1]));
 
 XOP = Wavelet('Daubechies_TI',4,6);
 
@@ -842,30 +1155,6 @@ gprint(get(gcf,'Number'),[ScanP BaseFN filesep YLbl '_L1ESPIRiT_B0_lam' num2str(
 close(gcf);
 save([ScanP BaseFN filesep YLbl '_L1ESPIRiT_B0_lam' num2str(lam) T2SCompStr '_CC.mat'],'resL1ESPIRiTCC1');
 disp(['Saved ' ScanP BaseFN filesep YLbl '_L1ESPIRiT_B0_lam' num2str(lam) T2SCompStr '_CC.mat']);
-%% Clean save
-% BaseOutLoc='/media/a/DATA/';
-SensMsk=single(grmss(SensCC(:,:,:),3)>0.01);
-
-SensCCA=SensCC(:,:,:,1,1);
-SensCCB=SensCC(:,:,:,1,2);
-SensMskA=single(grmss(SensCCA(:,:,:),3)>0.01);
-SensMskB=single(grmss(SensCCB(:,:,:),3)>0.01);
-
-TSBFA=TSBF(:,:,1).*cCAIPIVecZ(1,:);
-TSBFB=TSBF(:,:,2).*cCAIPIVecZ(2,:);
-TSCA=TSC(:,:,:,1);
-TSCB=TSC(:,:,:,2);
-
-CurOurP=[ScanP BaseFN filesep];
-mkdir(CurOurP);
-CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
-mkdir(CurOurPSli);
-save([CurOurPSli 'Sens.mat'],'CurSens');
-save([CurOurPSli 'SensCC.mat'],'SensCC','sccmtx','SensMsk');
-save([CurOurPSli 'SensCC1.mat'],'SensCCA','SensCCB','sccmtx','SensMskA','SensMskB');
-save([CurOurPSli 'B0TS.mat'],'TSBFA','TSBFB','TSB','TSCA','TSCB','osf','wg','sw','Mgc','TimeInMs2');
-save([CurOurPSli 'TrajAndRealData.mat'],'BARTTrajAct','DataP2','DataPCC');
-disp('Saved');
 %%
 CurBartTraj=BARTTrajAct;
 % CurBartTraj=BARTTrajMS;
@@ -875,17 +1164,6 @@ kMax=ceil(max(max(abs(CurBartTraj),[],2)));
 % xlabel(nTraj);
 Acc=(kMax*2)^2/nTraj;
 % title(['kMax: ' num2str(kMax) ' Acc (for kMax): ' num2str(Acc)]);
-%%
-tmp=squeeze(DataPCC);
-% RealDataFac=grmss(AllData(5656:34:6767,:,:))/grmss(tmp)
-RealDataFac=100;
-CurIDataV=Row(tmp)*RealDataFac;
-CurIDataVR=[real(CurIDataV) imag(CurIDataV)];
-        
-Data=repmat(single(CurIDataVR),[16 1]);
-RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
-save(RealDataFN,'Data');
-disp('Saved real data');
 %%
 % % TBaseP='~/HomeA/TF/srez/';
 % TBaseP='/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/';
@@ -941,149 +1219,13 @@ disp('Saved real data');
 % system('/home/a/RunTFForMatlab.sh');
 % sendTFMail(TBaseP,ParamsS,Txt);
 
-%%
-WhichSlices=nSlices:-1:1
-%% Multi slice
-for SliI=WhichSlices
-    nukData=ADataIsPy(:,:,SliI,1).';
-    nukData=nukData(:,3:end);
 
-    [U,S,sccmtx] = svd(nukData.','econ');
-    
-    sccmtxS(:,:,SliI)=sccmtx;
-    
-    ncc=13;
-    
-    CurSens=SensX(:,:,:,:,SliI);
-%     weights=ones(gsize(CurSens,[1 2 4]));
-%     ESP = ESPIRiT(CurSens,weights);
 
-    SensCC=permute(MultMatTensor(sccmtx(:,1:ncc).',permute(CurSens,[3 1 2 4])),[2 3 1 4]);
-    SensCCS(:,:,:,:,SliI)=SensCC;
-% weightsCC=ones(gsize(CurSens,[1 2 4]));
-% ESPCC = ESPIRiT(SensCC,weightsCC);
-end
-disp('SensCCS ok');
-%%
-for SliI=WhichSlices
-    CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
-    mkdir(CurOurPSli);
-    
-    nukData=ADataIsPy(:,:,SliI,1).';
-    nukData=nukData(:,3:end);
-    
-    DataCC=(sccmtxS(:,1:ncc,SliI).'*nukData);
-    
-    DataPCC=double(permute(DataCC,[3 2 1]));
-    
-    tmp=squeeze(DataPCC);
-%     RealDataFacS(SliI)=grmss(AllData(5656:34:6767,:,:))/grmss(tmp);
-    CurIDataV=Row(tmp)*100; %*RealDataFacS(SliI);
-    CurIDataVR=[real(CurIDataV) imag(CurIDataV)];
-    
-    Data=repmat(single(CurIDataVR),[16 1]);
-    RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
-    save(RealDataFN,'Data');
-end
-disp('Save slices real data for NN');
-% save([BaseOutLoc BaseFN filesep 'RealDataFacS.mat'],'RealDataFacS');
-%% All reps
-CurRealDataP=[ScanP BaseFN filesep 'RealData' filesep];
-mkdir(CurRealDataP);
-for SliI=WhichSlices
-    for r=1:nReps
-        disp([SliI r]);
-        nukData=ADataIsPy(:,:,SliI,r).';
-        nukData=nukData(:,3:end);
-        nukDataCC=MultMatTensor(sccmtxS(:,1:ncc,SliI).',nukData);
-        
-        CurIDataV=Row(nukDataCC.')*100; % *RealDataFac;
-        CurIDataVR=[real(CurIDataV) imag(CurIDataV)];
-        
-        Data=repmat(single(CurIDataVR),[16 1]);
-        RealDataFN=[CurRealDataP 'Sli' num2str(SliI) '_r' num2str(r,'%02d') '.mat'];
-        %     RealDataFN=['/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RealData/b_Ben14May_Sli5_r' num2str(r,'%02d') '.mat'];
-        save(RealDataFN,'Data');
-    end
-end
-disp('Saved slices real data for NN all reps');
 
-CurRealDataOutP=[ScanP BaseFN filesep 'RealDataOut' filesep];
-mkdir(CurRealDataOutP);
-for SliI=WhichSlices
-    mkdir([CurRealDataOutP 'Sli' num2str(SliI,'%02d')]);
-end
-%%
-% MgcS=imresizeBySlices(Mg(:,:,(1:nSlices)+6),Sz2);
-MgcS=imresizeBySlices(Mg,Sz2);
-MskcS=MgcS>7e-5;
 
-% B0M2S=-B0Q2;
-% B0M2S(~MskcS)=0;
-% 
-% SymMsk=abs(B0M2S-gflip(B0M2S,1))>230;
-% SymMsk(1:30,:,:)=true;
-% B0M2S(SymMsk & B0M2S>150)=-20;
 
-B0M2S=B0Q2;
 
-% fgmontage(B0M2S,[-500 500])
 
-% WhichSlices=1:nSlices;
-WhichSlices=nSlices:-1:1;
-%%
-clear TSBS TSCS
-%%
-nTS=15;
-for SliI=WhichSlices
-    B0M2=B0M2S(:,:,SliI);
-    Mgc=MgcS(:,:,SliI);
-    
-    Mskc=Mgc>7e-5;
-    MskcE=imdilate(imfill(Mskc,'holes'),strel('disk',5,8));
-    B0M2(~MskcE)=0;
-
-    
-    AllB0C=exp(1i*2*pi*RepDotMult(B0M2,gpermute(TimeInMs2(IA_TimeInMs2)/1000,[3 2])));  % exp(1i*2*pi*(TimeInMs2/1000)*B0M2);
-    E=reshape(AllB0C,prod(Sz2),nU_TimeInMs2);
-    MgcN=Mgc./grmss(Mgc);
-    WE=Col(MgcN);
-    % WE=Col(MgcN)*0+1;
-    WeightedE=WE.*E;
-    % Fessler time segmentation
-    % nTS=7;
-    clear ErrTS
-    TS_Thresh=1e-5;
-%     for nTS=13:15
-%     nTS=12;
-%         disp(nTS)
-        FesTimePoints=linspace(0,TimeInMs2(end)/1000,nTS);
-        TSC=exp(1i*2*pi*RepDotMult(B0M2,gpermute(FesTimePoints,[3 2])));  % exp(1i*2*pi*(TimeInMs2/1000)*B0M2);
-        TSC2=reshape(TSC,prod(Sz2),nTS);
-        WTSC2=WE.*TSC2;
-    %     tic
-    %     TSB=(E.')/(TSC2.');% W in both sides
-        TSB=(WeightedE.')/(WTSC2.');% W in both sides
-
-    %     ErrTS(nTS)=grmss(E-TSC2*(TSB.')); %include W
-        CurErrTS=grmss(WeightedE-WTSC2*(TSB.')); %include W
-        ErrTSS(nTS,SliI)=CurErrTS;
-
-        disp([datestr(now) ' Sli #' num2str(SliI) ' nTS ' num2str(nTS) ' err=' num2str(CurErrTS)]);
-%         if(ErrTSS(nTS)<TS_Thresh)
-%             disp(['Stopped at #TS=' num2str(nTS) ' err=' num2str(ErrTS(nTS))]);
-%             break;
-%         end
-%     end
-%     figure(87234);clf;plot(log10(ErrTS),'-*')
-    TSBS(:,:,SliI)=TSB;
-    TSCS(:,:,:,SliI)=TSC;
-end
-disp('ok TSBS TSCS');
-%%
-% load([ScanP BaseFN filesep 'TSBS_TSCS.mat'])
-save([ScanP BaseFN filesep 'TSBS_TSCS.mat'],'TSBS','TSCS','ErrTSS');
-disp('Saved TSBS TSCS');
 %% save TSBF TSC Per slice
 for SliI=WhichSlices
     YLbl=['Sli' num2str(SliI,'%02d')];
@@ -1124,16 +1266,22 @@ end
 for SliI=WhichSlices
     CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
 
-    ParamsSDefaults=getParamsStructFromFN('/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RegridTry3C2_7TS_RL_S3__2018-07-16_15-19-07_train/');
+%     ParamsSDefaults=getParamsStructFromFN('/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RegridTry3C2_7TS_RL_S3__2018-07-16_15-19-07_train/');
+    ParamsSDefaults=getParamsStructFromFN('/home/deni/TF/srez/RegridTry3C2_7TS_S02_Sli01__2018-07-23_09-40-59_train/');
     ParamsS=ParamsSDefaults;
     ParamsS.SessionNameBase=['RegridTry3C2_7TS_' ScanP(end-3:end-1) '_Sli' num2str(SliI,'%02d')];
+    ParamsS.SessionNameBase=['RegridTry3C2_7TS_' MIDStr '_Sli' num2str(SliI,'%02d')];
+    
     ParamsS.RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
     ParamsS.BaseTSDataP=CurOurPSli;
     ParamsS.BaseNUFTDataP=[ScanP BaseFN filesep];
-    Txt=gStruct2txt(ParamsS,'~/HomeA/TF/Params.txt');
+%     Txt=gStruct2txt(ParamsS,'~/HomeA/TF/Params.txt');
+    Txt=gStruct2txt(ParamsS,'~/TF/Params.txt');
     
-    system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+    system('sudo /home/deni/RunTFForMatlabx.sh');
 end
+% /home/deni/TF/srez/RegridTry3C2_7TS_g18_Sli06__2018-08-16_12-35-57_train
 %% GPU TS
 for SliI=WhichSlices
     TSBF=squeeze(TSBS(IB_TimeInMs2,:,SliI)).';
@@ -1331,5 +1479,34 @@ for SliI=WhichSlices
     Txt=gStruct2txt(St,'~/HomeA/TF/Params.txt');
     % disp('Prepared Params');
     %
-    system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+    system('sudo /home/deni/RunTFForMatlabx.sh');
 end
+
+
+%% Run already trained network on real data all reps
+TrainNNRunP='/home/deni/TF/srez/RegridTry3C2_7TS_g18_Sli06__2018-08-16_12-35-57_train/';
+
+St=getParamsStructFromFN(TrainNNRunP);
+St.LoadAndRunOnData=1;
+St.LoadAndRunOnData_checkpointP=[TrainNNRunP(1:end-6) 'checkpoint'];
+St.LoadAndRunOnData_Prefix=[ScanP BaseFN filesep 'RealData' filesep 'Sli' num2str(SliI) '_r'];
+St.LoadAndRunOnData_OutP=[ScanP BaseFN filesep 'RealDataOut' filesep 'Sli' num2str(SliI,'%02d') filesep];
+% Txt=gStruct2txt(St,'~/HomeA/TF/Params.txt');
+Txt=gStruct2txt(St,'~/TF/Params.txt');
+%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
+system('sudo /home/deni/RunTFForMatlabx.sh');
+%% Read NN output all reps
+NNOutP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/meas_MID488_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_4min_FID26056/RealDataOut/Sli06/';
+D=dir([NNOutP '*.mat']);
+for r=1:numel(D)
+    tmp=load([NNOutP D(r).name]);
+    NNRec(:,:,r)=double(squeeze(tmp.x(1,:,:,1))+1i*squeeze(tmp.x(1,:,:,2)));
+end
+%%
+MEven=NNRec(:,:,2:2:end);
+MOdd=NNRec(:,:,1:2:end);
+Perf=abs(MEven)-abs(MOdd);
+MPerf=mean(Perf,3);
+SPerf=std(Perf,0,3);
+tSNR_Perf=MPerf./SPerf;

@@ -1089,7 +1089,7 @@ RecTSAll(:,:,:,SliI,RepToRun)=RecTS;
 end
 end
 fgmontage(RecTS);title('BART TS')
-save([Echo2P filesep 'RecTSAll_Echo' num2str(WhichE) '.mat'],'RecTSAll');
+save([ScanP BaseFN filesep 'RecTSAll_Echo' num2str(WhichE) '.mat'],'RecTSAll');
 %% End BART TS Try
 
 

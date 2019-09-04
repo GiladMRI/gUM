@@ -1,8 +1,6 @@
 BaseTFRes='/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/';
 Prefix='RegridTry1C2_TS';
 Prefix='RegridTry3C2_TSB';
-
-Prefix='RegridTry3C2_7TS';
 % Prefix='RegridTry1C2_TS2';
 DB=dir([BaseTFRes Prefix '*']);
 [SDB,DOrd]=sort([DB.datenum]);

@@ -61,41 +61,9 @@ ScanP='/media/a/DATA/FC/';
 BaseFN='meas_MID158_gBP_ep2d_bold_multiecho_ASL_SMS_Spi_oblique_FID24551';
 RefFldMapP='/media/a/DATA/FC/meas_MID156_BP_fieldmap_5echosX_oblique_FID24549/';
 
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/DeeperRegion/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/DeeperRegion/meas_MID507_BP_fieldmap_5echosX_FID26075/';
-BaseFN='meas_MID519_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_6ADCs_FID26087';
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/DeeperRegion/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/DeeperRegion/meas_MID507_BP_fieldmap_5echosX_FID26075/';
-BaseFN='meas_MID524_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_OutInOut3ADCs_FID26092';
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/meas_MID484_BP_fieldmap_5echosX_FID26052/';
-BaseFN='meas_MID496_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_FID26064';
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/meas_MID484_BP_fieldmap_5echosX_FID26052/';
-BaseFN='meas_MID498_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_FID26066';
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/meas_MID484_BP_fieldmap_5echosX_FID26052/';
-BaseFN='meas_MID502_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_FID26070';
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/DeeperRegion/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/OnBP_9Aug18/DeeperRegion/meas_MID507_BP_fieldmap_5echosX_FID26075/';
-BaseFN='meas_MID521_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_OutInOut3ADCs_FID26089';
-
-
-ScanP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/27Aug18_TO/';
-RefFldMapP='/media/deni/c78a9273-3214-4387-9f72-4cdc3adef255/27Aug18_TO/meas_MID446_BP_fieldmap_5echosX_FID28384/';
-BaseFN='meas_MID448_gBP_ep2d_bold_multiecho_ASL_SMS_Spic_4min_FID28386';
-
 FN=[ScanP BaseFN '.dat'];
-
 %%
 mkdir([ScanP BaseFN]);
-system(['sudo chmod +777 -R ' ScanP BaseFN]);system(['sudo chmod +777 -R ' ScanP BaseFN]);
 %% Read raw
 AData = mapVBVD(FN);
 % ADataI=AData.image();
@@ -104,8 +72,6 @@ ADataIx=AData.image(:,:,:,:,:,3,:,:,:,:,:,:,:);
 % ADataIs=ADataIs(ADataIs(:,:,:,3,:)); % remove weird dimension with zeros
 % ADataIs=squeeze(ADataIs);
 ADataIsL=squeeze(ADataIx);
-
-nSlices=numel(AData.hdr.Phoenix.sSliceArray.asSlice);
 
 for i=1:numel(AData.hdr.Phoenix.sSliceArray.asSlice)
     SLoc(i,1)=AData.hdr.Phoenix.sSliceArray.asSlice{i}.sPosition.dSag;
@@ -118,6 +84,7 @@ if(iscell(asSlice(1)))
     asSlice=[AData.hdr.Phoenix.sSliceArray.asSlice{:}];
 end
 
+nSlices=numel(AData.hdr.Phoenix.sSliceArray.asSlice);
 % nSlices=numel(asSlice);
 for s=1:nSlices
     try
@@ -166,29 +133,13 @@ if(isempty(spBW))
 end
 disp('Read data');
 %%
-SummaryStr.MB=MB;
-SummaryStr.paramLongSpGradAmp=paramLongSpGradAmp;
-SummaryStr.paramLongSpSlewRate=paramLongSpSlewRate;
-SummaryStr.paramLongROSamples =paramLongROSamples;
-SummaryStr.spBW=spBW;
-SummaryStr.AccR=AccR;
-SummaryStr.paramLongInterleaves=paramLongInterleaves;
-SummaryStr.VD=VD;
-
-if(MB>1)
-    SummaryStr.CAIPISep_mm=CAIPISep_mm;
-    SummaryStr.CAIPIPeriod_us=CAIPIPeriod_us;
-    SummaryStr.CAIPIDelay_us=CAIPIDelay_us;
-end
-
-%%
 save([ScanP BaseFN filesep 'Data.mat'],'ADataIsL','AData');
 disp(['Saved ' [ScanP BaseFN filesep 'Data.mat']]);
 %%
 % save('StatusForTrajDesign1Band_2.mat');
 %% given everything but VD and Acc
 % OutInOut=false;
-OutInOut=paramLongROSamples>9000;
+OutInOut=paramLongROSamples>10000;
 if(OutInOut)
     [kTraj, BaseRes, GradBuf, MaxGrad]=VDSpiralMex([dFOV,paramLongROSamples/3,spBW,AccR,...
     paramLongInterleaves,VD,paramLongSpGradAmp,paramLongSpSlewRate,1]);
@@ -199,13 +150,12 @@ end
 WhichE=1;
 if(OutInOut)
     BaseLen=size(kTraj,1)/3;
+    WhichE=2;
     TrajIdxs=(1:BaseLen)+BaseLen*(WhichE-1);
     kTraj=kTraj(TrajIdxs,:);
     GradBuf=GradBuf(TrajIdxs,:);
 end
 
-% Take only part of traj:
-% kTraj=kTraj(1:Somewhere,:);
 
 EffMaxRes=sqrt(sum(((kTraj(end,:))*FOVx/2/pi/1000).^2))*2;
 
@@ -234,11 +184,8 @@ plot(BARTTrajMS(1,:),BARTTrajMS(2,:),'.')
 setXaxis([-1.1 1.1]*ceil(MaxK));
 setYaxis([-1.1 1.1]*ceil(MaxK));
 title(['MaxK=' num2str(MaxK) ' #Traj=' num2str(nTraj) ' Acc=' num2str(Acc)]);
-XResmm=dFOV*1000/(2*MaxK);
-xlabel(['Res ' num2str(XResmm,'%.2f') 'mm']);
-ylabel(['Nominal acc: ' num2str(AccR) ' VD=' num2str(VD)]);
 subplot(2,2,2);
-plot(GradBuf*MaxGrad*1000);title(['                Grad, max=' num2str(MaxGrad*1000,'%.2f') 'mT/m'])
+plot(GradBuf*MaxGrad*1000);title(['Grad, max=' num2str(MaxGrad*1000,'%.2f') 'mT/m'])
 SlewBuf=diff(GradBuf*MaxGrad*1000,[],1);
 subplot(2,2,4);
 plot(SlewBuf*100);MaxSlew=max(max(abs(SlewBuf(20:end,:))));
@@ -248,17 +195,6 @@ gprint(get(gcf,'Number'),[ScanP BaseFN filesep 'Traj'],[])
 close(gcf);
 save([ScanP BaseFN filesep 'Traj.mat'],'BARTTrajMS');
 disp('Saved traj fig');
-
-%% Summary P2
-SummaryStr.MaxK=MaxK;
-SummaryStr.nTraj=nTraj;
-SummaryStr.Acc=Acc;
-SummaryStr.XResmm=XResmm;
-
-fileName = ['Summary_' BaseFN(6:11) '.txt'];
-gStruct2txt(SummaryStr,[ScanP BaseFN filesep fileName]);
-disp('Saved summary txt');
-
 %%
 Trajm2=BARTTrajMS(1:2,1:end-2);
 Sz128=[128 128];
@@ -319,48 +255,24 @@ catch
     dx=0;
 end
 % dy=-15;
-dy=AData.hdr.Phoenix.sSliceArray.asSlice{1}.sPosition.dCor/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
+% dy=AData.hdr.Phoenix.sSliceArray.asSlice{1}.sPosition.dCor/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
 
 kx=BARTTrajMS(1,:)*2*pi;
 ky=BARTTrajMS(2,:)*2*pi;
 
-% IsOblique=isfield(AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal,'dCor');
+dy=RotatedLocs(1,1)/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
+modx=double(exp(1i*(dx*kx+dy*ky))');
 
-IsOblique=false;
-if(~IsOblique)
-%     dy=AData.hdr.Phoenix.sSliceArray.asSlice{1}.sPosition.dCor/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
-    dy=RotatedLocs(1,1)/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
-    modx=double(exp(1i*(dx*kx+dy*ky))');
-    
-    ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
-    if(OutInOut)
-%         nReps=3;
-%         ADataIsPx=PartitionDim(ADataIsPx(:,:,:,1),1,3);
-        ADataIsPx=PartitionDim(ADataIsPx,1,3);
-        ADataIsPx=ADataIsPx(:,:,:,:,WhichE);
-    end
-    ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
-    
-    ADataIsPy=RepDotMult(ADataIsPy,modx);
-else
-    Vnor=[AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal.dCor AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal.dTra];
-    Vpar=[Vnor(2) -Vnor(1)].';
-    for s=1:nSlices
-        Vpos=[AData.hdr.Phoenix.sSliceArray.asSlice{s}.sPosition.dCor AData.hdr.Phoenix.sSliceArray.asSlice{s}.sPosition.dTra];
-        dyS(s)=Vpos*Vpar/AData.hdr.Phoenix.sSliceArray.asSlice{1}.dPhaseFOV;
-        modxS(s,:)=double(exp(1i*(dx*kx+dyS(s)*ky))');
-    end
-    ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
-    if(OutInOut)
-%         nReps=3;
-%         ADataIsPx=PartitionDim(ADataIsPx(:,:,:,3),1,3);
-        ADataIsPx=PartitionDim(ADataIsPx,1,3);
-        ADataIsPx=ADataIsPx(:,:,:,:,WhichE);
-    end
-    ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
-    ADataIsPy=ADataIsPy.*permute(modxS,[2 3 1 4]);
+ADataIsPx=reshape(ADataIsP,[paramLongROSamples,nChannels nSlices nReps]);
+if(OutInOut)
+    ADataIsPx=PartitionDim(ADataIsPx,1,3);
+    ADataIsPx=ADataIsPx(:,:,:,:,WhichE);
 end
-% 
+ADataIsPy=ADataIsPx(1:size(BARTTrajMS,2),:,:,:,:);
+
+ADataIsPy=RepDotMult(ADataIsPy,modx);
+
+% IsOblique=isfield(AData.hdr.Phoenix.sSliceArray.asSlice{1}.sNormal,'dCor');
 % if(~IsOblique)
 %     modx=double(exp(1i*(dx*kx+dy*ky))');
 %     
@@ -650,7 +562,7 @@ AOdd = GOP_MCSMBMS;
 % AOdd = GOP_MC;
 
 % TVW=0.1;
-TVW=1e-7;
+TVW=1e-5;
 
 
 % filterType:   string, 'Haar', 'Beylkin', 'Coiflet', 'Daubechies','Symmlet', 'Vaidyanathan','Battle'
@@ -668,7 +580,7 @@ if(strcmp(XFMStr,'None'))
     xfmWeight=0;
 else
     XFM = Wavelet(XFMStr,filterSize,wavScale);
-    xfmWeight = 1e-7;	% Weight for Transform L1 penalty
+    xfmWeight = 1e-5;	% Weight for Transform L1 penalty
 end
 
 
@@ -754,16 +666,15 @@ end
 
 disp('ok im_res');
 
-% fgmontage(im_res,[0 7e-3]);
-fgmontage(im_res);
-%
+fgmontage(im_res,[0 7e-3]);
+%%
 XFMStrFull=['[' XFMStr ',' num2str(filterSize) ',' num2str(wavScale) ',' num2str(xfmWeight) ']'];
 %     XFMStr ' Size=' num2str(filterSize) ' Scale=' num2str(wavScale) ' W=' num2str(xfmWeight)
 XLbl=['L' num2str(param.pNorm) ',TVW=' num2str(param.TVWeight) ',' XFMStrFull ];
 xlabel(XLbl)
 YLbl=['Sli' num2str(SliI,'%02d')];
 ylabel(YLbl);
-%%
+
 gprint(get(gcf,'Number'),[ScanP BaseFN filesep YLbl '_' XLbl T2SCompStr],[]) 
 close(gcf);
 save([ScanP BaseFN filesep YLbl '_' XLbl T2SCompStr '.mat'],'im_res');
@@ -845,8 +756,7 @@ disp('ok cgL1ESPIRiTCC');
 resL1ESPIRiTCC1=resL1ESPIRiTCC(:,:,1);
 % fgmontage(cat(3,resL1ESPIRiT1, resL1ESPIRiTCC1),[0 7e-3])
 % title(['resL1ESPIRiT 2 maps, B0. Right - with CC -> ' num2str(ncc)]);
-% fgmontage(resL1ESPIRiTCC1,[0 7e-3])
-fgmontage(resL1ESPIRiTCC1)
+fgmontage(resL1ESPIRiTCC1,[0 7e-3])
 title(['resL1ESPIRiT ' num2str(nMapsToUse) ' maps, B0  with CC -> ' num2str(ncc)]);
 ylabel(YLbl);
 xlabel(['Daubechies_TI lam ' num2str(lam) ' splitWeight ' num2str(splitWeight)]);
@@ -1071,7 +981,7 @@ for SliI=WhichSlices
         CurErrTS=grmss(WeightedE-WTSC2*(TSB.')); %include W
         ErrTSS(nTS,SliI)=CurErrTS;
 
-        disp(['Calculating Time-segments coeffs: ' datestr(now) ' Sli #' num2str(SliI) ' nTS ' num2str(nTS) ' err=' num2str(CurErrTS)]);
+        disp([datestr(now) ' Sli #' num2str(SliI) ' nTS ' num2str(nTS) ' err=' num2str(CurErrTS)]);
 %         if(ErrTSS(nTS)<TS_Thresh)
 %             disp(['Stopped at #TS=' num2str(nTS) ' err=' num2str(ErrTS(nTS))]);
 %             break;
@@ -1126,18 +1036,15 @@ end
 for SliI=WhichSlices
     CurOurPSli=[ScanP BaseFN filesep 'Sli' num2str(SliI,'%02d') filesep];
 
-%     ParamsSDefaults=getParamsStructFromFN('/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RegridTry3C2_7TS_RL_S3__2018-07-16_15-19-07_train/');
-    ParamsSDefaults=getParamsStructFromFN('/home/deni/TF/srez/RegridTry3C2_7TS_S02_Sli01__2018-07-23_09-40-59_train/');
+    ParamsSDefaults=getParamsStructFromFN('/media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/TF/srez/RegridTry3C2_7TS_RL_S3__2018-07-16_15-19-07_train/');
     ParamsS=ParamsSDefaults;
     ParamsS.SessionNameBase=['RegridTry3C2_7TS_' ScanP(end-3:end-1) '_Sli' num2str(SliI,'%02d')];
     ParamsS.RealDataFN=[CurOurPSli 'RealDataForNN.mat'];
     ParamsS.BaseTSDataP=CurOurPSli;
     ParamsS.BaseNUFTDataP=[ScanP BaseFN filesep];
-%     Txt=gStruct2txt(ParamsS,'~/HomeA/TF/Params.txt');
-    Txt=gStruct2txt(ParamsS,'~/TF/Params.txt');
+    Txt=gStruct2txt(ParamsS,'~/HomeA/TF/Params.txt');
     
-%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
-    system('sudo /home/deni/RunTFForMatlabx.sh');
+    system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
 end
 %% GPU TS
 for SliI=WhichSlices
@@ -1336,6 +1243,5 @@ for SliI=WhichSlices
     Txt=gStruct2txt(St,'~/HomeA/TF/Params.txt');
     % disp('Prepared Params');
     %
-%     system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
-    system('sudo /home/deni/RunTFForMatlabx.sh');
+    system('sudo -H -u a /media/a/f38a5baa-d293-4a00-9f21-ea97f318f647/home/a/RunTFForMatlabx.sh');
 end

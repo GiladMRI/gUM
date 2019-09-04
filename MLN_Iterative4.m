@@ -6,7 +6,7 @@ load('Bart_Acc_test.mat','MskM');
 Accs=1.4:0.05:3;
 WhichAccs=[1 12 19 26 33];
 
-nIters=5;al
+nIters=5;
 %%
 N=200;
 SzI=[N N];
@@ -273,7 +273,7 @@ for i=1:3
     R3(:,:,i)=tmp;
 end
 figure;imshow(R3)
-%% on test image, all accs
+%% on test images, all accs
 % Iter=5;
 % Ni=5000;
 for CurAccI=1:numel(WhichAccs)
