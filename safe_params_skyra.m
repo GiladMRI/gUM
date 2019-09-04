@@ -1,0 +1,29 @@
+function skyra=safe_params_skyra()
+skyra=struct('name','skyra');
+skyra.look_ahead=1.02; % ???
+skyra.x.tau1=0.135;
+skyra.x.tau2=12;
+skyra.x.tau3=0.5175;
+skyra.x.a1=0.313;
+skyra.x.a2=0.1995;
+skyra.x.a3=0.4875;
+skyra.x.stim_limit=27.894;
+skyra.x.stim_thresh=22.315;
+
+skyra.y.tau1=0.171;
+skyra.y.tau2=12;
+skyra.y.tau3=0.628;
+skyra.y.a1=0.3045;
+skyra.y.a2=0.17;
+skyra.y.a3=0.5255;
+skyra.y.stim_limit=23.268;
+skyra.y.stim_thresh=18.614;
+
+skyra.z.tau1=0.184;
+skyra.z.tau2=12;
+skyra.z.tau3=0.65;
+skyra.z.a1=0.2575;
+skyra.z.a2=0.1895;
+skyra.z.a3=0.553;
+skyra.z.stim_limit=38.055;
+skyra.z.stim_thresh=30.444;
