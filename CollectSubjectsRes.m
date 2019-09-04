@@ -6,10 +6,17 @@ for CurSubj=WhichSubj
     CurSubjP=[BaseP 'S' num2str(CurSubj,'%02d') filesep];
     D=dir(CurSubjP);
     MeasFN=D(strhas({D.name},'_U19')).name;
+    
+    B0FN=D(strhas({D.name},'fieldmap')).name;
+    B0S=load([CurSubjP B0FN filesep 'B0S.mat']);
+    B0SA(:,:,:,CurSubj)=B0S.B0S(:,:,7:18);
+        
     CurSubjMP=[CurSubjP MeasFN filesep];
     D=dir(CurSubjMP);
     D=D([D.isdir]);
     D=D(strhas({D.name},'train'));
+    
+    
     for SliI=1:12
 %         SliI=5;
         CurSliP=[CurSubjMP D(strhas({D.name},['_Sli' num2str(SliI,'%02d') '__'])).name filesep];
@@ -38,6 +45,8 @@ for CurSubj=WhichSubj
     X=load([CurSubjMP 'im_resS.mat']);
     SPARSEMRI(:,:,:,CurSubj)=X.im_resS;
 end
+disp('ok');
+%%
 AllRec=cat(5,double(MLNOut),resL1ESPIRiTCCS1,SPARSEMRI,RecS,RecSMM);
 for i=1:size(AllRec,3)
     for j=1:size(AllRec,4)
@@ -48,6 +57,57 @@ for i=1:size(AllRec,3)
         end
     end
 end
+%%
+AllRecWB0=AllRecN;
+AllRecWB0(:,:,:,:,end+1)=(rot90(B0SA,3)+100)/200;
+%%
+Pd=15;
+Cmd='convert ';
+for CurSubj=WhichSubj
+    fgmontage(AllRecWB0(:,:,:,CurSubj,:));
+    ylabel([PadStringWithBlanks('B_0',Pd) PadStringWithBlanks('BART 2 maps',Pd) PadStringWithBlanks('BART',Pd) PadStringWithBlanks('SparseMRI',Pd) PadStringWithBlanks('ESPIRIT',Pd) 'MLN']);
+    gprint(get(gcf,'Number'),['/media/a/DATA/ASLSubjData/AllSlices_S' num2str(CurSubj,'%02d') ],[]) 
+    close(gcf);
+    Cmd=[Cmd '/media/a/DATA/ASLSubjData/AllSlices_S' num2str(CurSubj,'%02d') '.png '];
+end
+Cmd=[Cmd '/media/a/DATA/ASLSubjData/AllSubjects.pdf'];
+system(Cmd);
+%%
+Cmd='convert ';
+for CurSubj=WhichSubj
+    for s=1:12
+        disp([CurSubj s]);
+        fgmontage(abs(AllRecWB0(:,:,s,CurSubj,:)));
+
+        Q=get(gcf,'Children');
+        X=floor(get(Q(end),'XLim'));
+        Y=floor(get(Q(end),'YLim'));
+
+        set(gcf, 'InvertHardCopy', 'off');
+        
+        title(['Subj #' num2str(CurSubj) ' slice #' num2str(s)]);
+        
+        dx=X(2)/3;
+        dy=Y(2)/2;
+        text(10,20,'MLN','FontSize',14,'Color',[1 1 1])
+        text(10+dx,20,'ESPIRiT','FontSize',14,'Color',[1 1 1])
+        text(10+dx*2,20,'SparseMRI','FontSize',14,'Color',[1 1 1])
+        text(10,20+dy,'BART','FontSize',14,'Color',[1 1 1])
+        text(10+dx,20+dy,'BART 2 maps','FontSize',14,'Color',[1 1 1])
+        text(10+dx*2,20+dy,'B_0','FontSize',14,'Color',[1 1 1])
+
+        gprint(get(gcf,'Number'),['/media/a/DATA/ASLSubjData/S' num2str(CurSubj,'%02d') '_Sli' num2str(s,'%02d')],[])
+        close(gcf);
+        
+        Cmd=[Cmd '/media/a/DATA/ASLSubjData/S' num2str(CurSubj,'%02d') '_Sli' num2str(s,'%02d') '.png '];
+    end
+end
+Cmd=[Cmd '/media/a/DATA/ASLSubjData/AllSlices.pdf'];
+system(Cmd)
+%%
+system('convert /media/a/DATA/ASLSubjData/AllSlices_S01.png /media/a/DATA/ASLSubjData/AllSlices_S02.png /media/a/DATA/ASLSubjData/AllSlices_S.pdf')
+%%
+fgmontage(AllRecWB0(:,:,s,CurSubj,:));
 %%
 % fgmontage(MLNOut)
 % fgmontage(resL1ESPIRiTCCS1)

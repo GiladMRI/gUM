@@ -18,7 +18,7 @@ X=cat(1,SDNames{:});
 X=textscan(X.','batch%06d_out_%f.png');
 BatchN=X{1};
 ScrN=X{2};
-MinN=(SDatenums-SDatenums(1)).'*86400/60;
+MinN=(SDatenums-SDatenums(1))*86400/60;
 if(ShowFig)
     figure;plot(MinN(3:end),ScrN(3:end));
     ylabel('Score');
