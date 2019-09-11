@@ -2,7 +2,15 @@ FNBase='SpiGradVec';
 
 % M=rand(3,12);
 % M=[GAll(:,:,1) GAll(:,:,2) GAll(:,:,3)].';
-M=CombineDims(GAll,[3 2]).';
+if(ndims(GAll)>2)
+    M=CombineDims(GAll,[3 2]).';
+else
+    if(size(GAll,1)<size(GAll,2))
+        M=GAll;
+    else
+        M=GAll.';
+    end
+end
 MaxVals=max(abs(M),[],2);
 M=M./MaxVals;
 M=[real(M) imag(M)];
@@ -27,3 +35,4 @@ fclose(fid);
 fid=fopen([FNBase '.h'],'wt');
 fprintf(fid,'#ifndef ___%s__\r\n#define ___%s__ 1\nvoid get%s(float *&Out, long l);\n#endif',FNBase,FNBase,FNBase);
 fclose(fid);
+disp(['Saved ' FNBase]);
