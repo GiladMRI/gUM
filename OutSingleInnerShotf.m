@@ -1,4 +1,4 @@
-function [g2Shots, OutS]=OutMultiInnerShotPNSf(FOV,res_mm,VD,nLoops,FullROTime_ms,Gmax_mTm,Smax_Tms,GradDwellTime_ms,PNSsystem,PNST,ShotPhi)
+function [g2Shots, OutS]=OutSingleInnerShotf(FOV,res_mm,VD,nLoops,UseMTG_forLowK, FullROTime_ms,Gmax_mTm,Smax_Tms,GradDwellTime_ms,PNSsystem,PNST,ShotPhi)
 % addpath(genpath('/autofs/space/daisy_002/users/Gilad/mintgrad/'));
 %%
 % New out in
@@ -36,88 +36,110 @@ g=g.*exp(-1i*PhiEnd);
 k=cumsum([0; g])*GradDwellTime_ms*TwoPiGammaMHz; % mT/m*ms * 2*pi*MHz/T = rad/m
 s=diff(g)/GradDwellTime_ms;
 
-% % gPlotTraj_radm(g)
-% %%now connect
-% % % gEnd=g(end);
-% % % gStartNext=-conj(gEnd);
-% % % kEnd=k(end);
-% % % Nest=100;
-% % % Cg=mintimegrad_radm(Nest,gEnd,gStartNext,-2*kEnd,DwellTimeGrad_ms,Gmax_mTm, Smax_Tms);
-% % %
+% gPlotTraj_radm(g)
+%%now connect
 % % gEnd=g(end);
-% % gStartNext=[];
+% % gStartNext=-conj(gEnd);
 % % kEnd=k(end);
-% % Nest=50;
-% % Cg=mintimegrad_radm(Nest,gEnd,gStartNext,-kEnd,GradDwellTime_ms,Gmax_mTm, Smax_Tms);
+% % Nest=100;
+% % Cg=mintimegrad_radm(Nest,gEnd,gStartNext,-2*kEnd,DwellTimeGrad_ms,Gmax_mTm, Smax_Tms);
 % %
-% AngleT=pi/6;
-% Id=find(angle(k)<-AngleT,1,'last');
-% dId=numel(k)-Id;
-% Id2=Id-dId;
-% 
-% % figure;
-% % plot(k);hold on;
-% % plot(k(end),'*');hold on;
-% % plot(k(end)*0,'*');
-% % plot(k(Id),'*');hold on;
-% % plot(conj(k(Id)),'*');hold on;
-% % plot(k(Id2),'*');hold on;
-% % plot(IxyC,'r')
-% %
-% CC=[k(Id2) k(Id) k(end) conj(k(Id)) k(end)*0];
-% CC(3)=abs(CC(2)).*exp(1i*angle(CC(3)));
-% CC(4)=real(CC(4))*0.8+1i*imag(CC(4))*0.8;
-% xy=[real(CC(:)) imag(CC(:))].';
-% npts=size(xy,2);
-% 
-% Curve=cscvn(xy);
-% Ixy=fnval(Curve,linspace(Curve.breaks(2),Curve.breaks(end),100));
-% IxyC=Ixy(1,:)+1i*Ixy(2,:);
-% IxyC=IxyC.';
-% L=sum(abs(diff(IxyC)));
-% dPoint=abs(k(end)-k(end-1));
-% Ixy=fnval(Curve,linspace(Curve.breaks(2),Curve.breaks(end),ceil(L/dPoint)));
-% IxyC=Ixy(1,:)+1i*Ixy(2,:);
-% IxyC=IxyC.';
-% 
-% % Out=Ixy(1,:)+1i*Ixy(2,:);
-% % plot(IxyC,'r')
-% %
+% gEnd=g(end);
+% gStartNext=[];
+% kEnd=k(end);
+% Nest=50;
+% Cg=mintimegrad_radm(Nest,gEnd,gStartNext,-kEnd,GradDwellTime_ms,Gmax_mTm, Smax_Tms);
+%
+AngleT=pi/6;
+Id=find(angle(k)<-AngleT,1,'last');
+dId=numel(k)-Id;
+Id2=Id-dId;
+
+% figure;
+% plot(k);hold on;
+% plot(k(end),'*');hold on;
+% plot(k(end)*0,'*');
+% plot(k(Id),'*');hold on;
+% plot(conj(k(Id)),'*');hold on;
+% plot(k(Id2),'*');hold on;
+% plot(IxyC,'r')
+%
+CC=[k(Id2) k(Id) k(end) conj(k(Id)) k(end)*0];
+CC(3)=abs(CC(2)).*exp(1i*angle(CC(3)));
+CC(4)=real(CC(4))*0.8+1i*imag(CC(4))*0.8;
+xy=[real(CC(:)) imag(CC(:))].';
+npts=size(xy,2);
+
+Curve=cscvn(xy);
+Ixy=fnval(Curve,linspace(Curve.breaks(2),Curve.breaks(end),100));
+IxyC=Ixy(1,:)+1i*Ixy(2,:);
+IxyC=IxyC.';
+L=sum(abs(diff(IxyC)));
+dPoint=abs(k(end)-k(end-1));
+Ixy=fnval(Curve,linspace(Curve.breaks(2),Curve.breaks(end),ceil(L/dPoint)));
+IxyC=Ixy(1,:)+1i*Ixy(2,:);
+IxyC=IxyC.';
+
+% Out=Ixy(1,:)+1i*Ixy(2,:);
+% plot(IxyC,'r')
+%
 % kAll1=[k(1:Id); IxyC(2:end); -flipud(IxyC(2:end-1)); -flipud(k(1:Id))];
-% % kAll1=[k(1:Id); IxyC(2:end)];
-% %%
-% % figure;plot(k(1:Id),'b.');hold on
-% % plot(IxyC(2:end),'ro');
-% % plot(-flipud(IxyC(2:end-1)),'g.')
-% % plot(-flipud(k(1:Id)),'k*');
-% %%
-% % kAll=interp1(1:numel(kAll1),kAll1,1:1:numel(kAll1)).';
-% % kAll=interp1(1:numel(kAll1),kAll1,[1:0.5:5 6:numel(kAll1)]).';
-% 
-% kAll=kAll1;
-% % DD=20;
-% % kAll=interp1(1:numel(kAll1),kAll1,[1:0.6:DD DD+1:numel(kAll1)-DD-1 numel(kAll1)-DD:0.9:numel(kAll1)]).';
-% 
-% [~,g2,~]=minTimeGradient_radm(kAll,[], 0, 0, Gmax_mTm, Smax_Tms,GradDwellTime_ms);
-% kAll=cumsum([0; g2])*GradDwellTime_ms*TwoPiGammaMHz; % mT/m*ms * 2*pi*MHz/T = rad/m
+% kAll1=[k(1:Id); IxyC(2:end)];
 kAll=cumsum([0; g])*GradDwellTime_ms*TwoPiGammaMHz; % mT/m*ms * 2*pi*MHz/T = rad/m
-% kAll=[kAll;0];
-% kAll(end)=0;
+
 g2=diff(kAll)/GradDwellTime_ms/TwoPiGammaMHz;
 % gPlotTraj_radm(g2) %% 6ms
 g20=[0;g2];
 % max(abs(diff(g20)))
 %%
-Nest=50;
-
-Cg=mintimegrad_radm(Nest,g20(end-Nest),complex(0),-kAll(end-Nest),GradDwellTime_ms,Gmax_mTm, Smax_Tms);
-
+if(UseMTG_forLowK)
+    Nest=56;
+    
+    Cg=mintimegrad_radm(Nest,g20(end-Nest-1),complex(0),kAll(end-Nest),GradDwellTime_ms,Gmax_mTm, Smax_Tms);
+    g20=[0;g2(1:end-Nest-3);conj(Cg)*exp(1i*angle(kAll(end-Nest)))];
+else
+    g20=[0;g2(1:end)];
+end
 % Cgs=mintimegrad_radm(Nest,complex(0),g20(Nest),kAll(Nest),GradDwellTime_ms,Gmax_mTm, Smax_Tms);
+kAll1=cumsum([0; g20])*GradDwellTime_ms*TwoPiGammaMHz; % mT/m*ms * 2*pi*MHz/T = rad/m
+kAll=kAll1;
 %%
-g20=[0;g2(1:end-Nest);Cg];
 
-% g20=[Cgs;g2(Nest:end-Nest);Cg];
 
+%%
+% figure;plot(k(1:Id),'b.');hold on
+% plot(IxyC(2:end),'ro');
+% plot(-flipud(IxyC(2:end-1)),'g.')
+% plot(-flipud(k(1:Id)),'k*');
+%%
+% kAll=interp1(1:numel(kAll1),kAll1,1:1:numel(kAll1)).';
+% kAll=interp1(1:numel(kAll1),kAll1,[1:0.5:5 6:numel(kAll1)]).';
+
+% kAll=kAll1;
+% DD=20;
+% kAll=interp1(1:numel(kAll1),kAll1,[1:0.6:DD DD+1:numel(kAll1)-DD-1 numel(kAll1)-DD:0.9:numel(kAll1)]).';
+
+[~,g2,~]=minTimeGradient_radm(kAll,[], 0, 0, Gmax_mTm, Smax_Tms,GradDwellTime_ms);
+kAll=cumsum([0; g2])*GradDwellTime_ms*TwoPiGammaMHz; % mT/m*ms * 2*pi*MHz/T = rad/m
+% kAll=[kAll;0];
+kAll(end)=0;
+g2=diff(kAll)/GradDwellTime_ms/TwoPiGammaMHz;
+% gPlotTraj_radm(g2) %% 6ms
+g20=[0;g2];
+% max(abs(diff(g20)))
+%%
+% if(UseMTG_forLowK)
+%     Nest=10;
+% 
+%     Cg=mintimegrad_radm(Nest,g20(end-Nest),complex(0),-kAll(end-Nest),GradDwellTime_ms,Gmax_mTm, Smax_Tms);
+% 
+%     Cgs=mintimegrad_radm(Nest,complex(0),g20(Nest),kAll(Nest),GradDwellTime_ms,Gmax_mTm, Smax_Tms);
+%     %
+%     % g20=[0;g2(1:end-Nest);Cg];
+% 
+%     g20=[Cgs;g2(Nest:end-Nest);Cg];
+% end
+%%
 TimePerInnerShot_ms=numel(g20)*GradDwellTime_ms;
 
 % gPlotTraj_radm(g20,FOV) %% 6ms
@@ -156,7 +178,8 @@ GradDwellTime_s=GradDwellTime_ms/1000;
 GoldenAngle=ShotPhi;
 GoldenAngler=GoldenAngle/360;
 
-nInnerBase=floor(FullROTime_ms/TimePerInnerShot_ms);
+% nInnerBase=floor(FullROTime_ms/TimePerInnerShot_ms);
+nInnerBase=1;
 for nInner=nInnerBase:-1:1
     if(mod(nInner,2)==0)
         nInnerTmp=nInner*2;
