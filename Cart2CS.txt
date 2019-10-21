@@ -1,0 +1,3 @@
+fmac 0 8
+fftc 3
+fmac 1 0
