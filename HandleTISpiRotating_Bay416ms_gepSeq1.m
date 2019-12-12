@@ -2,6 +2,12 @@ ScanP='/autofs/cluster/kawin/Gilad/gep2d_Try1_Phantom_Traj1/';
 BaseFN='meas_MID00394_FID40730_gep2d_gese_sms_mgh_EPTI';
 RefFldMapP=[ScanP 'meas_MID04675_FID21637_gre_te4_9' filesep];
 
+ScanP='/autofs/cluster/kawin/Gilad/gep2d_Try1_Phantom_Traj1/';
+BaseFN='meas_MID01330_FID41644_SEPTI';
+
+ScanP='/autofs/cluster/kawin/Gilad/gep_Phantom/';
+BaseFN='meas_MID00924_FID42864_gepBase_T2_50rep';
+
 MIDStr=BaseFN(6:11);
 FN=[ScanP BaseFN '.dat'];
 disp('ok');
@@ -51,7 +57,7 @@ disp('Read raw');
 TE0_ms=2.38;
 
 load('GTraj16.mat');
-TrajType=WipMemBlock.adFree{12};
+% TrajType=WipMemBlock.adFree{12};
 GTrajaCBase=GTraj16;
 % ResType=floor((TrajType-10)/2)+1; % 1.9,1.3
 % TimingType=mod(TrajType-10,2)+1; % 6ms, 8ms
@@ -115,7 +121,7 @@ FOV_mm=FOVx;
 disp('ok');
 
 GradReduceFac=1; % WipMemBlock.adFree{4};
-PhiRotPerRep=110; % WipMemBlock.adFree{8};
+PhiRotPerRep=0; % WipMemBlock.adFree{8};
 AcqDwellTime_us=2; %WipMemBlock.adFree{13}/1000;
 
 dx=RotatedLocs(2,1)/FOVx;
@@ -171,9 +177,9 @@ dlyI=1;
     disp('-------');
     disp(dlyI);
     Delay_us=Delays_us(dlyI);
-    AcqTimePoints_us=Extra*GradDwellTime_us+Delay_us+(0:AcqDwellTime_us:52000);
+    AcqTimePoints_us=Extra*GradDwellTime_us+Delay_us+(0:AcqDwellTime_us:48000);
 
-    nRepsToUse=nRepsHdr-1;
+    nRepsToUse=nRepsHdr;
     
     clear TrajM
     for i=1:nRepsToUse
@@ -198,22 +204,17 @@ dlyI=1;
 Sz=TrgSz;
 Sz16=FillOnesTo16(Sz);
 %%
+% image_datan = AData{1}.noise.unsorted(); % no slicing supported atm
+image_data = ADatax.image.unsorted(); % no slicing supported atm
+XX=PartitionDim(PartitionDim(image_data,3,nRepsHdr*nSlices),4,nRepsHdr);
+XX=CombineDims(XX,[3 1]);
+
 SlicesToRead=[2];
 for SlicesToRead=1:nSlices
-RepsToRead=1:(nRepsHdr-1);
+RepsToRead=1:(nRepsHdr);
 % ADataIsL=ADatax.image(:,:,:,:,SlicesToRead,3,:,:,RepsToRead,:,ADCsToRead,:,:,:,:,:,:);
-ADataIsL=ADatax.image(:,:,:,:,:,:,:,:,:,:,SlicesToRead,:,:,:,:,:,:);
-
-image_data = ADatax.image.unsorted(); % no slicing supported atm
-
-image_datan = AData{1}.noise.unsorted(); % no slicing supported atm
-
-% 
-% ADataIsL=ADatax.image(:,:,:,:,SlicesToRead,:,:,:,RepsToRead,:,:,:,:,:,:,:,:);
-% 
-% ADataIsL=permute(ADataIsL,[1 2 9 11 5 3:4 6:8 10]);
-% ADataIsL=CombineDims(ADataIsL,[4 1]);
-
+% ADataIsL=ADatax.image(:,:,:,:,:,:,:,:,:,:,SlicesToRead,:,:,:,:,:,:);
+ADataIsL=squeeze(XX(:,:,SlicesToRead,:));
 disp('Read data');
 %%
 ChRMS=grmss(ADataIsL,[1 3]);
@@ -235,14 +236,17 @@ disp('ok cc');
     DataC=permute(ADataIsLCC,[1 3 2]);
     %% Recon each channel separately, no CC
 nTrajToUse=size(BARTTrajP,2);
-TrajPartToUse=0+(1:2000);
+TrajPartToUse=0+(1:9000);
 RepsToUse=1:(nRepsHdr-1);
 
-DataPC=permute(ADataIsL(1:nTrajToUse,:,:,:,:,:,:,:,:),[4 1 3 5 6 7 8 2]).*modx;
+RepsToUse=5:38;
+
+% DataPC=permute(ADataIsL(1:nTrajToUse,:,:,:,:,:,:,:,:),[4 1 3 5 6 7 8 2]).*modx;
+DataPC=permute(ADataIsL(1:nTrajToUse,:,:,:,:,:,:,:,:),[8 1 3 7 6 5 4 2]).*modx;
 OnesSensC=repmat(OnesSens,[1 1 1 1 1 1 1 size(DataPC,8)]);
 
 Rec1p=bart('pics -t ',BARTTrajP(:,TrajPartToUse,RepsToUse),(DataPC(:,TrajPartToUse,RepsToUse,1,1,1,1,:)),OnesSensC);
-% fgmontage(grmss(Rec1p,8));removeTicks;
+fgmontage(grmss(Rec1p,8));removeTicks;
 % title([num2str(numel(RepsToUse)) ' shots data x ' num2str(numel(TrajPartToUse)) 'points, pre channel recon, RMS']);
 %%
 Rec1pRMS=grmss(Rec1p,8);
@@ -270,7 +274,7 @@ disp('ok 0');
 %%
 TightMask=DMsk;
 %% Try to get all TSC, multi-shot, for B0,T2*
-CurReps=1:39;
+CurReps=5:39;
 
 nTS_THLR=15;
 
@@ -299,20 +303,21 @@ TimePointsMed_ms3=permute(TimePointsMed_ms,[1 3 2]);
 nTraj=numel(TrajPartMed);
 TotalAcqTime_ms=AcqDwellTime_us*nTraj/1000;
 
-nPointsNoNav=floor(50000/AcqDwellTime_us);
-NoNavTime_ms=nPointsNoNav*AcqDwellTime_us/1000;
-NoNavB=zeros(1,nTraj);
-NoNavB(1:nPointsNoNav)=1;
+% nPointsNoNav=
+% floor(50000/AcqDwellTime_us);
+% NoNavTime_ms=nPointsNoNav*AcqDwellTime_us/1000;
+% NoNavB=zeros(1,nTraj);
+% NoNavB(1:nPointsNoNav)=1;
 
 % TSBMed=GetTSCoeffsByLinear(nPointsMed,nTSMed);
-[TSBMed, dT_Med, TimePointsR_Med]=GetTSCoeffsByLinearWithPlateau(nPointsNoNav,nTSMed);
+[TSBMed, dT_Med, TimePointsR_Med]=GetTSCoeffsByLinearWithPlateau(nTraj,nTSMed);
 dT_Med_ms=dT_Med*NoNavTime_ms;
 FirstT_Med_ms=TimePointsR_Med(1)*NoNavTime_ms;
 TimePoints_Med_ms=TimePointsR_Med*NoNavTime_ms;
 TimePoints_Med_ms3=permute(TimePoints_Med_ms,[1 3 2]);
-TSBMed(nPointsMed,1)=0;
+% TSBMed(nPointsMed,1)=0;
 TSBPMed=permute(TSBMed,[3 1 4 5 6 7 2]);
-KernsPMMed=getKernsFromTrajM(TrajM(1:(nRepsHdr-1),TrajPartMed),Sz,TSBMed);
+KernsPMMed=getKernsFromTrajM(TrajM(1:nRepsHdr,TrajPartMed),Sz,TSBMed);
 
 ScriptFN_AllTS=[BaseSP 'nuftAllTSC_N.txt'];
 Sz16AllTSC=FillOnesTo16([Sz 1 1 1 1 nTSMed]);

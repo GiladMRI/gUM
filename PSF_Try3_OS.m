@@ -8,6 +8,7 @@ HalfN=N/2;
 RR=sqrt((X-HalfN).^2+(Y-HalfN).^2);
 NN=N*N;
 Sz=[N N];
+TakeTopLeftBlock=@(x,Sz) x(1:Sz(1),1:Sz(2),:,:,:,:);
 t_ms=(0:(NN-1))*deltat_ms;
 
 % Non-uniform
@@ -21,6 +22,7 @@ Kd32=int32([N N]);
 %
 AccBase=3;
 nTrajBase=floor(NN/AccBase);
+
 %%
 Idx=(X-1)*N+Y;
 A=zeros(N);
@@ -61,6 +63,13 @@ R=(linspace(0,1,nTrajBase).^VD)*(N/2);
 Phi=linspace(0,2*pi*nLoops,nTraj);
 CTraj=R.*exp(1i*Phi);
 Traj=[real(CTraj); imag(CTraj)];
+%%
+T2Vals=[5:5:200];
+TEs=1:50;
+T2Decays=exp(-TEs./(T2Vals.'));
+[~,~,Vd]=svd(T2Decays,'econ');
+
+bas=Vd(:,1:2);
 %%
 nTraj=size(Traj,2);
 w=exp(-t_ms(1:nTraj)/T2S_ms).';

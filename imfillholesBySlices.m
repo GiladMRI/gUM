@@ -1,5 +1,5 @@
 function Out=imfillholesBySlices(In)
 Out=zeros(size(In));
 for i=1:prod(gsize(In,3:20))
-    Out(:,:,i)=imfill(In(:,:,i),'holes');
+    Out(:,:,i)=imfill(In(:,:,i),8,'holes');
 end

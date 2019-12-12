@@ -11,6 +11,9 @@ end
 if(nargin<2)
     LFac=5;
 end
+if(nargin<4)
+    SFac=1;
+end
 Linx=linspace(-pi,pi,N(1));
 Liny=linspace(-pi,pi,N(2));
 

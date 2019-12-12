@@ -15,6 +15,9 @@ BaseFN='meas_MID00605_FID37709_gSpi2d_T10_Dw11_d110_VD1';
 % BaseFN='meas_MID00608_FID37712_gSpi2d_T14_Dw11_d110_VD102';
 % BaseFN='meas_MID00610_FID37714_gSpi2d_T15_Dw11_d110_VD102';
 
+ScanP='/autofs/cluster/kawin/Gilad/gep2d_Try1_Phantom_Traj1/';
+BaseFN='meas_MID01323_FID41637_gSpi2d_T17_Dw11_d110_VD102';
+
 MIDStr=BaseFN(6:13);
 FN=[ScanP BaseFN '.dat'];
 disp('ok');
@@ -79,12 +82,13 @@ TE0_ms=2.38;
 TrajType=WipMemBlock.adFree{12};
 % ResType=floor((TrajType-10)/2)+1; % 1.9,1.3
 ResType=1;
-TimingType=mod(TrajType-10,6)+1; % 6ms, 8ms
+TimingType=mod(TrajType-10,8)+1; % 6ms, 8ms
 % G1=load('GAll68x.mat');
 % G2=load('GAll68cor.mat');
 % GAll=cat(2,G1.GAll, G2.GAll);
 
-load('GAll1p9mmVD1PAT3.mat');
+% load('GAll1p9mmVD1PAT3.mat');
+load('GAll1p9mmVD1PAT3Pause.mat');
 
 GNav=load('GNav1ms.mat');
 GNav=GNav.GNav;
@@ -96,7 +100,7 @@ else
     nInnerShots=6;
 end
 disp('Read traj base');
-%%
+%
 gammaMHz=42.574; % MHz/T
 TwoPiGammaMHz=gammaMHz*2*pi;
 GradDwellTime_us=10;
@@ -309,16 +313,21 @@ save([mainP filesep 'sccmtxS.mat'],'sccmtxS');
 save([mainP filesep 'SensCCS.mat'],'SensCCS');
 save([mainP filesep 'SelfSens1S.mat'],'SelfSens1S');
 save([mainP filesep 'DataCCP1S.mat'],'DataCCP1S');
-
+%%
+load([mainP filesep 'sccmtxS.mat'],'sccmtxS');
+load([mainP filesep 'SensCCS.mat'],'SensCCS');
+load([mainP filesep 'SelfSens1S.mat'],'SelfSens1S');
+load([mainP filesep 'DataCCP1S.mat'],'DataCCP1S');
 %%
 TrajPartToUseX=1:14536; % 29082 % 43627
 TrajPartToUseXC={1:14080 14500+(1:14080) 29100+(1:14080)};
-nCCToUseX=1:17;
+nCCToUseX=1:25;
 
 for SliI=1:nSlices
 for i=1:3
 %     RecC{i}=bart('pics -S -u -R T:3:0:0.0000000001 -t ',BARTTrajP(:,TrajPartToUseXC{i},1),DataCCP(:,TrajPartToUseXC{i},1,nCCToUseX),SensCC(:,:,:,nCCToUseX));
-    RecC{i}=bart('pics -S -u -R T:3:0:0.0000000001 -t ',BARTTrajP(:,TrajPartToUseXC{i},1),permute(DataCCP1S(TrajPartToUseXC{i},nCCToUseX,SliI),[4 1 3 2]),SensCCS(:,:,SliI,nCCToUseX));
+%     RecC{i}=bart('pics -S -u -R T:3:0:0.0000000001 -t ',BARTTrajP(:,TrajPartToUseXC{i},1),permute(DataCCP1S(TrajPartToUseXC{i},nCCToUseX,SliI),[4 1 3 2]),SensCCS(:,:,SliI,nCCToUseX));
+    RecC{i}=bart('pics -S -u -R T:3:0:0.0001 -t ',BARTTrajP(:,TrajPartToUseXC{i},1),permute(DataCCP1S(TrajPartToUseXC{i},nCCToUseX,SliI),[4 1 3 2]),SensCCS(:,:,SliI,nCCToUseX));
 end
 RecCM=cat(3,RecC{:});
 RecCMS(:,:,:,SliI)=RecCM;
@@ -326,6 +335,8 @@ end
 %%
 save([mainP filesep 'RecCMS.mat'],'RecCMS');
 disp('saved RecCMS');
+%%
+load([mainP filesep 'RecCMS.mat']);
 %%
 RefSpiP='/autofs/cluster/kawin/Gilad/VD1PAT3_CL_CylPhantom/meas_MID00605_FID37709_gSpi2d_T10_Dw11_d110_VD1/';
 for SliI=1:nSlices

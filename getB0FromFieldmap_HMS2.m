@@ -24,7 +24,10 @@ BaseP='/autofs/cluster/kawin/Gilad/EPTI_and_spi68ms/';
 FN='meas_MID03482_FID20451_gre_te4_9';
 
 BaseP='/autofs/cluster/kawin/Gilad/EPTI_and_spi68ms_on_CL/';
-FN='meas_MID04675_FID21637_gre_te4_9';
+FN='meas_MID00654_FID30513_gre_4echo_32_22';
+
+BaseP='/autofs/space/daisy_001/users/data/Gilad/gEPTI_Try1/';
+FN='meas_MID00538_FID48435_gre_4echo_32_22_128both';
 
 sTwix = mapVBVD([BaseP FN '.dat'],'removeOS','ignoreSeg','doAverage','rampSampRegrid');
 sTwixX=sTwix{end};

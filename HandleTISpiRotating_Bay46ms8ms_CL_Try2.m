@@ -1,5 +1,6 @@
 ScanP='/autofs/cluster/kawin/Gilad/EPTI_and_spi68ms_on_CL/';
 BaseFN='meas_MID04692_FID21654_gSpi2d_T10_Dw11_d110_VD1';
+BaseFN='meas_MID04694_FID21656_gSpi2d_T11_Dw11_d110_VD1';
 RefFldMapP=[ScanP 'meas_MID04675_FID21637_gre_te4_9' filesep];
 
 MIDStr=BaseFN(6:11);
@@ -232,7 +233,7 @@ DataPC=permute(ADataIsL(1:nTrajToUse,:,:,:,:,:,:,:,:),[4 1 3 5 6 7 8 2]).*modx;
 OnesSensC=repmat(OnesSens,[1 1 1 1 1 1 1 size(DataPC,8)]);
 
 Rec1p=bart('pics -t ',BARTTrajP(:,TrajPartToUse,RepsToUse),(DataPC(:,TrajPartToUse,RepsToUse,1,1,1,1,:)),OnesSensC);
-% fgmontage(grmss(Rec1p,8));removeTicks;
+fgmontage(grmss(Rec1p,8));removeTicks;
 % title([num2str(numel(RepsToUse)) ' shots data x ' num2str(numel(TrajPartToUse)) 'points, pre channel recon, RMS']);
 %%
 Rec1pRMS=grmss(Rec1p,8);

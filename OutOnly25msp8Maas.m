@@ -1,6 +1,6 @@
-VD=1.3;
+VD=1;
 FOV=200;
-ResV=1.25;
+ResV=0.8;
 
 FullROTime_ms=50;
 Gmax_mTm=80;
@@ -35,7 +35,7 @@ TimeForOneSpiral_ms=25;
 GradStepsp1=TimeForOneSpiral_ms/GradDwellTime_ms+1;
 
 SlowAccurateTraj=true;
-nLoopsPerSpiral=30;
+nLoopsPerSpiral=17;
 GmsA=OutSingleInnerShotPNSf(FOV,ResV(1),VD,nLoopsPerSpiral,SlowAccurateTraj,Gmax_mTm,Smax_Tms,GradDwellTime_ms);
 
 % GmsA=OutSingleInnerShotPNSf(FOV,ResV(1),VD,17.7,true,Gmax_mTm,135,GradDwellTime_ms);
@@ -52,6 +52,7 @@ PhiBetweenInnerShots=2*pi/2;
 tmp=Row(Gms.*exp(1i*(0:(nInnerShots-1))*PhiBetweenInnerShots)).';
 G1=tmp;
 gPlotTraj_radm(tmp,FOV,ma7T);MaximizeFig;
+subplot(2,3,1);xlabel(nLoopsPerSpiral);
 subplot(2,3,2);cla;QuickAnalyzeTrajJumpsf(tmp,GradDwellTime_ms,TwoPiGammaMHz,FOV_mm);
 %%
 GAll=tmp;

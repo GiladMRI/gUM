@@ -409,12 +409,21 @@ MapsS=zeros([168,96,5,32,5,14]);
 
 RecMXSDRS=zeros(168,96,56,32,5,14);
 %%
-for SliI=7:11
-    for RunI=1:5
-        for DynI=1:32
+for i=1:5
+    ElemsL{i}=readcfl([CurSDRPrefix 'ElemsL_' num2str(i-1)]);
+end
+%%
+for SliI=6:11
+    for RunI=1 %:5
+        for DynI=1 %:32
             disp([SliI RunI DynI]);
 %             CurSPrefix=['/autofs/cluster/kawin/FuyixueWang/Share/DataEPTI_20190719_SEfMRI_invivo/raw_and_recon/Try6S' num2str(SliI) '_'];
 %             CurSDRPrefix=['/autofs/cluster/kawin/FuyixueWang/Share/DataEPTI_20190719_SEfMRI_invivo/raw_and_recon/Try6S' num2str(SliI) '_' 'Run' num2str(RunI) '_Dyn' num2str(DynI) '_'];
+            if(SliI==6)
+                OutP='/autofs/cluster/kawin/FuyixueWang/Share/DataEPTI_20190719_SEfMRI_invivo/raw_and_recon/';
+            else
+                OutP=[BaseSEP 'splitProx/'];
+            end
             CurSPrefix=[OutP 'Try6S' num2str(SliI) '_'];
             CurSDRPrefix=[OutP 'Try6S' num2str(SliI) '_' 'Run' num2str(RunI) '_Dyn' num2str(DynI) '_'];
             for i=1:5
@@ -559,3 +568,255 @@ save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/AllEchosS8.nii');
 QQ=make_nii(CombineDims(mRecMXSDRx,[6 3]));
 QQ.hdr.dime.pixdim(5)=8.83;
 save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/AllEchosS611.nii');
+
+XX=grmss(mRecMXSDRx,3:4);
+QQ=make_nii(XX);
+QQ.hdr.dime.pixdim(5)=8.83;
+save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/MeanEchosS611.nii');
+%%
+mRecMXSDRx=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI/AllEchosS611.nii');
+
+WhichEcho=10;
+XX=mean(mRecMXSDRx(:,:,((4:6)-1)*56+WhichEcho,:),3);
+QQ=make_nii(XX);
+QQ.hdr.dime.pixdim(5)=8.83;
+save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/SES911.nii');
+
+mAllSRecx=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI/AllEchosS611_Sub.nii');
+
+XXS=mean(mAllSRecx(:,:,((4:6)-1)*56+WhichEcho,:),3);
+QQ=make_nii(XXS);
+QQ.hdr.dime.pixdim(5)=8.83;
+save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/SES911Sub.nii');
+
+XXB=cat(3,XX,XXS);
+QQ=make_nii(XXB);
+QQ.hdr.dime.pixdim(5)=8.83;
+save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/SES911E10B.nii');
+
+ZB=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI911E10B.feat/stats/zstat1.nii.gz');
+ZBM=RemoveSmallComponentsBySlices(ZB>2,5);
+
+ZSplit=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI911.feat/stats/zstat1.nii.gz');
+ZSub=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI911Sub.feat/stats/zstat1.nii.gz');
+
+XXS=mean(mAllSRecx(:,:,((4:6)-1)*56+WhichEcho,:),3);
+XX=mean(mAllSRecx(:,:,((4:6)-1)*56+WhichEcho,:),3);
+
+BothSingleTimePoint=cat(5,mAllSRecx,mRecMXSDRx);
+
+fgmontagex(perm43(squeeze(rot90(BothSingleTimePoint(10:end-10,20:end-9,7:56*2:end,10,:),3))));caxis(caxis/1.2)
+figure;imagesc(CombineDims(CombineDims(squeeze(RGBBoth(20:end-9,10:end-10,:,1:2:end,:)),[4 2]),[4 1]));daspect([1 1 1]);removeTicks;
+%% Collect subspace recon
+SReconP='/autofs/cluster/kawin/FuyixueWang/EPTI/DataEPTI_20190719_SEfMRI_invivo/data/1_Recon_subspace/';
+for SliI=6:11
+    for RunI=1:5
+        for DynI=1:32
+            disp([SliI RunI DynI]);
+            clear RawData GRecon
+            CurSRecon=load([SReconP 'Recon_Subspace_SE_Run' num2str(RunI) '_Dyn' num2str(DynI) '_Slice' num2str(SliI) '_SE_correctB0drift1.mat']);
+            CurSRecon=CurSRecon.im_recon;
+            AllSRec(:,:,:,DynI,RunI,SliI)=CurSRecon;
+        end
+    end
+end
+
+AllSRec611=single(AllSRec(:,:,:,:,:,6:11));
+mAllSRec=mean(abs(AllSRec611),5);
+mAllSRecx=circshift(mAllSRec,48,2);
+
+% save('/autofs/cluster/kawin/Gilad/SE_fMRI/mAllSRecx.mat','mAllSRecx');
+QQ=make_nii(CombineDims(mAllSRecx,[6 3]));
+QQ.hdr.dime.pixdim(5)=8.83;
+save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/AllEchosS611_Sub.nii');
+
+
+XXS=grmss(mAllSRecx,3:4);
+QQ=make_nii(XXS);
+QQ.hdr.dime.pixdim(5)=8.83;
+save_nii(QQ,'/autofs/cluster/kawin/Gilad/SE_fMRI/MeanEchosS611_Sub.nii');
+%%
+XXS=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI/MeanEchosS611_Sub.nii');
+XX=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI/MeanEchosS611.nii');
+%%
+ZSplit=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI++++.feat/stats/zstat1.nii.gz');
+ZSub=loadniidata('/autofs/cluster/kawin/Gilad/SE_fMRI_Sub.feat/stats/zstat1.nii.gz');
+
+fgmontagex(rot90(ZSplit(:,:,WhichEchoToShow:56:end),3),[2 4]);
+fgmontagex(rot90(XX,3));
+
+fgmontagex(rot90(ZSub(:,:,WhichEchoToShow:56:end),3),[2 4]);
+fgmontagex(rot90(XXS,3));
+%%
+WhichEchoToShow=10;
+% WhichEchoToShow=50;
+% WhichEchoToShow=1;
+ComponentSizeT=5;
+ZRange=[1.5 5];
+ZThresh=2.5;
+BGFac=15;
+CMapFac=1.4;
+NZThresh=(ZThresh-ZRange(1))/(ZRange(2)-ZRange(1));
+cmap=[0 0 0; hot(floor(256*CMapFac))];
+cmap=cmap(1:256,:);
+ncmap=size(cmap,1);
+%
+XXSN=XXS./grmss(XXS)/BGFac;
+NZ=(ZSub(:,:,WhichEchoToShow:56:end)-ZRange(1))/(ZRange(2)-ZRange(1));
+Msk=rot90(NZ>NZThresh,3);
+Msk=RemoveSmallComponentsBySlices(Msk,ComponentSizeT);
+NZ=floor(max(0,min(ncmap-1,NZ*(ncmap-1))));
+
+XXSN=rot90(XXSN,3);
+NZ=rot90(NZ,3);
+clear RGB RGB2
+for s=1:size(XXS,3)
+RGB(:,:,:,s)=repmat(XXSN(:,:,s),[1 1 3]);
+RGB2(:,:,:,s)=ind2rgb(NZ(:,:,s),cmap);
+for i=1:3
+    tmp=RGB(:,:,i,s);
+    tmp2=RGB2(:,:,i,s);
+    tmp(Msk(:,:,s))=tmp2(Msk(:,:,s));
+    RGB(:,:,i,s)=tmp;
+end
+end
+
+RGB_Sub=RGB;
+RGBX=PartitionDim(RGB,4,2);
+RGBX=CombineDims(CombineDims(RGBX,[4 2]),[4 1]);
+
+RGBX_Sub=RGBX;
+
+
+XXSN=XX./grmss(XX)/BGFac;
+NZ=(ZSplit(:,:,WhichEchoToShow:56:end)-ZRange(1))/(ZRange(2)-ZRange(1));
+Msk=rot90(NZ>NZThresh,3);
+Msk=RemoveSmallComponentsBySlices(Msk,ComponentSizeT);
+NZ=floor(max(0,min(ncmap-1,NZ*(ncmap-1))));
+
+XXSN=rot90(XXSN,3);
+NZ=rot90(NZ,3);
+clear RGB RGB2
+for s=1:size(XXS,3)
+RGB(:,:,:,s)=repmat(XXSN(:,:,s),[1 1 3]);
+RGB2(:,:,:,s)=ind2rgb(NZ(:,:,s),cmap);
+for i=1:3
+    tmp=RGB(:,:,i,s);
+    tmp2=RGB2(:,:,i,s);
+    tmp(Msk(:,:,s))=tmp2(Msk(:,:,s));
+    RGB(:,:,i,s)=tmp;
+end
+end
+
+RGB_Split=RGB;
+
+RGBX=PartitionDim(RGB,4,2);
+RGBX=CombineDims(CombineDims(RGBX,[4 2]),[4 1]);
+
+RGBX_Split=RGBX;
+%
+% figure;
+% subplot(2,1,1);
+% imagesc(RGBX_Sub);daspect([1 1 1]);removeTicks;title('Subspace');
+% subplot(2,1,2);
+% imagesc(RGBX_Split);daspect([1 1 1]);removeTicks;title('splitProx');
+
+RGBBoth=cat(5,RGB_Sub,RGB_Split);
+% figure;imagesc(CombineDims(squeeze(RGBBoth(:,:,:,5,:)),[4 2]));daspect([1 1 1]);removeTicks;
+figure;imagesc(CombineDims(squeeze(RGBBoth(20:end-20,10:end-10,:,5,:)),[4 2]));daspect([1 1 1]);removeTicks;
+
+%%
+FEATModel=[-3.662682e-01	-6.744374e-02	
+-4.175204e-01	7.607082e-02	
+-1.808425e-01	5.333419e-01	
+6.782869e-01	3.607224e-01	
+5.546227e-01	-7.455747e-02	
+5.453662e-01	-1.728180e-01	
+2.253436e-01	-5.685199e-01	
+-5.696907e-01	-3.495791e-01	
+-4.378555e-01	5.938801e-02	
+-4.172731e-01	-5.003631e-03	
+-4.145831e-01	-1.525271e-02	
+-4.145461e-01	1.484547e-01	
+-8.444184e-02	5.541353e-01	
+7.211533e-01	3.349243e-01	
+5.986735e-01	-7.585366e-02	
+5.848658e-01	-2.100973e-01	
+1.941416e-01	-5.760498e-01	
+-5.447023e-01	-3.255597e-01	
+-4.214580e-01	5.264453e-02	
+-4.060600e-01	-8.122812e-03	
+-4.046210e-01	-1.526232e-02	
+-4.035273e-01	1.814978e-01	
+-8.587242e-03	5.579941e-01	
+7.385561e-01	3.130760e-01	
+6.305256e-01	-5.736036e-02	
+6.386954e-01	-2.146154e-01	
+2.160110e-01	-5.364579e-01	
+-4.120735e-01	-2.416278e-01	
+-2.340562e-01	1.159653e-01	
+-1.500841e-01	6.985120e-02	
+-6.577107e-02	7.535203e-02	
+2.772049e-02	8.076308e-02	];
+%%
+ES_ms=1.08;
+FirstTE_ms=9;
+
+Occipital_GM_T2Prime_ms=500;
+
+T2Vals=5:5:200;
+T2primeVals=400:20:900;
+
+nSEEchos=56;
+
+TimePoints=((1:nSEEchos))*ES_ms;
+TimePoints_ms3=perm32(TimePoints);
+
+TimePointsSE=abs((1:nSEEchos)-29)*ES_ms;
+TimePointsSE_ms3=perm32(TimePointsSE);
+
+for i=1:1000  
+    Decays(i,:)=exp(-TimePoints/T2Vals(randi(numel(T2Vals)))).*exp(-TimePointsSE/T2primeVals(randi(numel(T2primeVals))));
+end
+
+[~,~,Comps]=svd(Decays,'econ');
+disp('OK Decays');
+%%
+kDataMultiDyn=single(zeros(56,168,96,32,32));
+SliI=6;
+for RunI=1
+    for DynI=1:32
+        disp([SliI RunI DynI]);
+        clear RawData GRecon
+        CurRawData=load([RawDataP 'SE_Run' num2str(RunI) '_Dyn_' num2str(DynI) '_Slice' num2str(SliI) '.mat']);
+        kDataMultiDyn(:,:,:,:,DynI)=single(CurRawData.kdata_SE);
+    end
+end
+disp('OK kDataMultiDyn');
+%%
+nShots=3;
+kDataMultiDynX=PartitionDim(kDataMultiDyn,3,nShots);
+kDataMultiDynX=sum(kDataMultiDynX,3);
+kDataMultiDynX=permute(kDataMultiDynX,[2 6 3 4 7 5 1]);
+iROkDataMultiDynX=ifft1cg(kDataMultiDynX,1);
+% sig kRO kPE 1 CC 1 Dyn Echos
+tmp=squeeze(kDataMultiDyn(:,7,:,5,6));
+
+MaskSamples=abs(tmp)>0;
+FMaskSamples=fft1cg(single(MaskSamples),2);
+
+BigTimeModel=[FEATModel ones(32,1)];
+
+CurSPrefix=[OutP 'Try6S' num2str(SliI) '_'];
+CurSens=readcfl([CurSPrefix 'SensCC']);
+
+CompsP=permute(Comps(:,1:4),[7 6 5 4 3 8 1 2]);
+BigTimeModelP=permute(BigTimeModel,[9 8 7 6 5 1 4 3 2]);
+
+BothComps=reshape(CompsP.*BigTimeModelP,[1 1 1 1 1 32 56 12]);
+%%
+
+Data2D=reshape(kDataMultiDyn(:,:,:,:,1),[],size(kDataMultiDyn,4));
+    Msk1D=abs(Data2D(:,1))>0;
+    
+kDataMultiDyn

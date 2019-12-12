@@ -1,4 +1,17 @@
-rmpath(genpath('/autofs/cluster/kawin/FuyixueWang/EPTI/Functions/'))
+directory_rawdata = '/autofs/cluster/kawin/Gilad/EPTI_and_spi68msx_on_CL/';
+FNBase='meas_MID00868_FID32103_ep2d_ge_sms1_EPTI_1p9_fully';
+% FNBase='meas_MID00892_FID32127_ep2d_ge_sms1_EPTI_1p9_fully_Cor';
+
+filename = [directory_rawdata,FNBase,'.dat'];
+save_filename = 'Calib';
+
+OutP = [directory_rawdata FNBase filesep];
+mkdir(OutP);
+system(['chmod +777 -R ' OutP]);
+disp([OutP ' Created']);
+%%
+slice=9;
+load([OutP 'kdata_Slice' num2str(slice) '.mat'],'kdata');
 %%
 gammaMHz=42.574; % MHz/T
 TwoPiGammaMHz=gammaMHz*2*pi;
@@ -11,22 +24,41 @@ FOV=228; % meas.prot.dReadoutFOV
 FOV_mm=FOV;
 Sz=[120 120];
 %%
+addpath(genpath('/autofs/cluster/kawin/FuyixueWang/EPTI/Functions'));
+rmpath(genpath('/autofs/cluster/kawin/FuyixueWang/EPTI/Functions/bart-0.2.06/'));
+
+pf_echo=0;
+nRepToRead=1; BeginRep=1; SMS_data=0; ascendingSlice_acq=0;
+[meas] = read_meas_dat_memmap_EPTI_GESE(filename,nRepToRead,BeginRep,SMS_data,ascendingSlice_acq,pf_echo);
+
+rmpath(genpath('/autofs/cluster/kawin/FuyixueWang/EPTI/Functions/'))
+%%
 kdatax=kdata(1:120,1:120,:,:);
 idatax=ifft2cg(kdatax);
 %% Sensitivity map
-Sens=RunESPIRiTForSensMapsMultiMap(squeeze(idatax(:,:,1,:)),0,Sz);
+% Sens=RunESPIRiTForSensMapsMultiMap(squeeze(idatax(:,:,1,:)),0,Sz);
+Sens=RunESPIRiTForSensMapsMultiMap(squeeze(idatax(:,:,1,:)),14,Sz);
 Sens=perm43(Sens(:,:,:,1));
 
 CombinedAllEchos=sum(idatax.*conj(Sens),4);
 %%
-ES_ms=meas.prot.iEffectiveEpiEchoSpacing/1000;
-
+% ES_ms=meas.prot.iEffectiveEpiEchoSpacing/1000;
 ES_ms=0.7273;
 %% Fit
 TE0_ms=9;
 WhichTSToUs=5:50;
 [~, UpdatedB0MapA, UpdatedT2SMap_msA, s_valsA, FittedA, PDBase0A]=...
     FitToModel_MPBD1CSf(CombinedAllEchos,WhichTSToUs,ES_ms,TE0_ms+ES_ms);
+%%
+G2mm=load('Grads2mmb.mat');
+% QQ=load('GAll1p9mmVD1PAT3Pause.mat');
+QQ=load('GAll1p9mmVD1PAT3Pauseb.mat');
+AllGrads=cat(1,G2mm.Grads{:}).';
+AllGrads=cat(2,AllGrads,QQ.GAll(:,7:8));
+G11mm=load('Grads11mmb.mat');
+AllGrads11=cat(1,G11mm.Grads{:}).';
+AllGrads=cat(2,AllGrads,AllGrads11);
+
 %%
 GTraj16=tmp.';
 %% EPTI R=4 jitter 2
@@ -48,6 +80,11 @@ disp('EPTI');
 load('GAll1p9mmVD1PAT3.mat');
 % GAll 4800           6
 GTraj=GAll(:,6)/1.02;
+%%
+TrajIdx=1;
+for TrajIdx=1:12
+    disp('TrajIdx');
+GTraj=AllGrads(:,TrajIdx);
 
 % GTraj=GAll(:,1);
 % 
@@ -79,56 +116,57 @@ STrajd=STraj;
 Rs=interp1(1:nTraj,abs(Traj),linspace(1,nTraj,nEchosData));
 
 disp('Prepared traj');
-%% Delay
-Trajd=interp1((0:(size(kK,1)-1))*GradDwellTime_us,kK,AcqTimePoints_us+2);
-Trajd=Trajd(~isnan(Trajd));
-STrajd=Trajd;
-STrajd(end+1:nTraj)=0;
-disp('Delay');
-%% distort
-kKd=kK;
-kKd(1600+(1:1600))=kKd(1600+(1:1600))+0.4;
-kKd(2*1600+(1:1600))=kKd(2*1600+(1:1600))+0.8;
-Trajd=interp1((0:(size(kK,1)-1))*GradDwellTime_us,kKd,AcqTimePoints_us);
-Trajd=Trajd(~isnan(Traj));
-STrajd=Trajd;
-disp('Distorted');
+% %% Delay
+% Trajd=interp1((0:(size(kK,1)-1))*GradDwellTime_us,kK,AcqTimePoints_us+2);
+% Trajd=Trajd(~isnan(Trajd));
+% STrajd=Trajd;
+% STrajd(end+1:nTraj)=0;
+% disp('Delay');
+% %% distort
+% kKd=kK;
+% kKd(1600+(1:1600))=kKd(1600+(1:1600))+0.4;
+% kKd(2*1600+(1:1600))=kKd(2*1600+(1:1600))+0.8;
+% Trajd=interp1((0:(size(kK,1)-1))*GradDwellTime_us,kKd,AcqTimePoints_us);
+% Trajd=Trajd(~isnan(Traj));
+% STrajd=Trajd;
+% disp('Distorted');
+% %%
+% I2Spiral=kK*0;
+% I2Spiral(1600+(1:1600))=1;
+% I3Spiral=kK*0;
+% I3Spiral(1*1600+(1:1600))=1;
+% 
+% I2I=interp1((0:(size(kK,1)-1))*GradDwellTime_us,I2Spiral,AcqTimePoints_us);
+% I2I=I2I(~isnan(Traj));
+% I2IB=I2I>0;
+% 
+% I3I=interp1((0:(size(kK,1)-1))*GradDwellTime_us,I3Spiral,AcqTimePoints_us);
+% I3I=I3I(~isnan(Traj));
+% I3IB=I3I>0;
+% %% Multi shot
+% kKf=flip(kK,1);
+% Trajf=-interp1((0:(size(kKf,1)-1))*GradDwellTime_us,kKf,AcqTimePoints_us);
+% Trajf=Trajf(~isnan(Traj));
+% STrajf=Trajf;
+% 
+% STrajf=Traj.*exp(1i*2*pi/3);
+% STrajf2=Traj.*exp(1i*2*pi*2/3);
+% 
+% STrajf=Traj.*exp(1i*2*pi*(140/360));
+% STrajf2=Traj.*exp(1i*2*pi*(280/360));
+% 
+% STrajX=[STraj; STrajf; STrajf2];
+% 
+% % STrajX=[STraj; STrajf];
+% STraj=STrajX(:).';
+% nTraj=numel(STraj);
+% Traj=STraj;
+% 
+% STrajd=STraj;
+% AcqTimePoints_usx=AcqTimePoints_us*nTrajBase/nTraj;
+% disp('Applied multishot');
 %%
-I2Spiral=kK*0;
-I2Spiral(1600+(1:1600))=1;
-I3Spiral=kK*0;
-I3Spiral(1*1600+(1:1600))=1;
-
-I2I=interp1((0:(size(kK,1)-1))*GradDwellTime_us,I2Spiral,AcqTimePoints_us);
-I2I=I2I(~isnan(Traj));
-I2IB=I2I>0;
-
-I3I=interp1((0:(size(kK,1)-1))*GradDwellTime_us,I3Spiral,AcqTimePoints_us);
-I3I=I3I(~isnan(Traj));
-I3IB=I3I>0;
-%% Multi shot
-kKf=flip(kK,1);
-Trajf=-interp1((0:(size(kKf,1)-1))*GradDwellTime_us,kKf,AcqTimePoints_us);
-Trajf=Trajf(~isnan(Traj));
-STrajf=Trajf;
-
-STrajf=Traj.*exp(1i*2*pi/3);
-STrajf2=Traj.*exp(1i*2*pi*2/3);
-
-STrajf=Traj.*exp(1i*2*pi*(140/360));
-STrajf2=Traj.*exp(1i*2*pi*(280/360));
-
-STrajX=[STraj; STrajf; STrajf2];
-
-% STrajX=[STraj; STrajf];
-STraj=STrajX(:).';
-nTraj=numel(STraj);
-Traj=STraj;
-
-STrajd=STraj;
-AcqTimePoints_usx=AcqTimePoints_us*nTrajBase/nTraj;
-disp('Applied multishot');
-%%
+disp('Caluclating sig...');
 STraj3=CTo3Rows(STraj);
 STraj3d=CTo3Rows(STrajd);
 Sigx=bart('nufft ',STraj3d,perm73(idatax));
@@ -248,6 +286,11 @@ hold on;
 % plot(1:nEchosData,Sz(1)/2-Rs);
 % plot(1:nEchosData,Sz(1)/2-Rs);
 % plot(linspace(1,nEchosData,numel(kK)),Sz(1)/2-abs(kK));
+N2mktC{TrajIdx}=N2mkt;
+N2mktCX{TrajIdx}={mkt mktA Nfac};
+end
+%%
+save('N2mktC.mat','N2mktC','N2mktCX');
 %%
 N2mkt_3Spi=N2mkt;
 N2mkt_Spi6ms=N2mkt;

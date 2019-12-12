@@ -392,6 +392,14 @@ fgmontagex(BeforeAfter(:,:,WhichEchoToShow,:))
 
 fgmontagex(BeforeAfter(200:330,100:250,WhichEchoToShow,:))
 %%
+BeforeT2S=UpdatedT2SMap_ms(WhichROIdxs,WhichPEIdxs);
+AfterT2S=UpdatedT2SMap_ms_EOB0cm;
+BeforeT2S=UpdatedT2SMap_mst;
+AfterT2S=UpdatedT2SMap_ms_EOB0cm(:,1:end-5);
+BeforeAfterT2S=cat(3,BeforeT2S,AfterT2S);
+fgmontagex(BeforeAfterT2S,[0 100]);colormap hot
+fgmontagex(BeforeAfterT2S(200:330,100:250,:),[0 100]);colormap hot
+%%
 SmallVarT=50e6;
 getSmallVars;
 save([BasePX 'SmallVars2_40.mat'],SmallVars{:});

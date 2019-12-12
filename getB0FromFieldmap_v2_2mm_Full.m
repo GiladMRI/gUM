@@ -14,6 +14,9 @@ FN='meas_MID881_BP_fieldmap_9echos_2mm_Full_low_FID51495';
 BaseP='/autofs/cluster/kawin/Gilad/PhantomBay4/';
 FN='meas_MID00526_FID03646_gre_te7_40';
 
+BaseP='/autofs/cluster/kawin/Gilad/Ma_5x5/';
+FN='meas_MID135_BP_fieldmap_5echosX_FID8425_1mm';
+FN='meas_MID128_BP_fieldmap_5echosX_FID8418_2mm';
 
 sTwix = mapVBVD([BaseP FN '.dat'],'removeOS','ignoreSeg','doAverage','rampSampRegrid');
 Data=sTwix.image();
@@ -54,6 +57,7 @@ ZLocs=RotatedLocs(3,:);
 Ord=[2:2:nSlices 1:2:nSlices];
 [~,ROrd]=sort(Ord);
 disp('ok');
+save([BaseP FN filesep 'Locs.mat'],'RotatedLocs','ZLocs');
 %%
 D=gpermute(Data,[1 3 4 2 8 5 6 7]);
 % PD=padLeft(D,24,2);

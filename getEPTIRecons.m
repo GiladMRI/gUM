@@ -9,6 +9,8 @@ ShowAbsAngle(G6.im_EPTI_correct(:,:,1,:))
 %%
 fgmontage(G6.im_EPTI_correct(:,:,1,11:11:end))
 fgmontage(G16.im_EPTI_correct(:,:,1,11:11:end))
+
+fgmontage(gflip(G6.im_EPTI_correct(:,:,11:11:end),2))
 %%
 fgmontage(S6.im_recon(:,:,11:11:end))
 fgmontage(S16.im_recon(:,:,11:11:end))

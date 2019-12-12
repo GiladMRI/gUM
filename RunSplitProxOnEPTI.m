@@ -306,6 +306,10 @@ tmp=readcfl([ToBARTP 'ElemsWS_1']);
 
 tmp=readcfl([ToBARTP 'mDimsOut']);
 %%
+for i=1:4
+    ElemsL{i}=readcfl([ToBARTP 'ElemsL_' num2str(i-1)]);
+end
+%%
 ErrVec=readcfl([ToBARTP 'ErrVec']);
 ErrVec=ErrVec(1:(find(ErrVec<=0,1))-1);
 figure;plot(ErrVec)
@@ -341,6 +345,14 @@ for i=1:4
     if(i==3), xlabel(num2str(ElemsAlphas,' %.9g,')); end %ylabel(Pref,'Interpreter','None'); end
     if(i==4), xlabel(num2str(ElemsLambda,' %.9g,')); end
 end
+%%
+MmM=ElemsL{1}.*Maps{1};
+expPpM = exp(ElemsL{2}.* Maps{2});
+expBbM = exp(ElemsL{3}.* Maps{3});
+expTtM = exp(ElemsL{4}.* (1./Maps{4}));
+RecM=MmM.*expPpM.*expBbM.*expTtM;
+RecMX=squeeze(sum(RecM,CS_Dim));
+
 %%
 Mm0=ElemL{1}*Elem0{1};
 expPp0 = exp(ElemL{2} * Elem0{2});
@@ -393,6 +405,8 @@ fgmontagex(S6.im_recon(:,:,1:13:end),[0 10]);title('Subspace');
 SeveralRecs=cat(3,G6.im_EPTI_correct(:,:,1,EchoIToShow),S6.im_recon(:,:,EchoIToShow),Rec0X(:,:,EchoIToShow),RecMX(:,:,EchoIToShow));
 fgmontagex(SeveralRecs,[0 7]);
 %%
+fgmontagex(rot90(SeveralRecs(:,:,[1 2 4]),3),[0 7],'Size',[1 3]);title('GRAPPA Subspace splitProx')
+%%
 SeveralRecsFull=cat(4,squeeze(G6.im_EPTI_correct),S6.im_recon,Rec0X,RecMX);
 for i=1:4
         [PDBaseSR(:,:,i), UpdatedB0Map_HzSR(:,:,i), UpdatedT2SMap_msSR(:,:,i), s_valsSR(:,:,:,i),...
@@ -400,6 +414,8 @@ for i=1:4
         FitToModel_MPBD1CSf(SeveralRecsFull(:,:,:,i),WhichEchosToUse,ES_ms,FirstTE_ms);
 end
 fgmontagex(UpdatedT2SMap_msSR,[0 200]);colormap hot
+%%
+fgmontagex(rot90(UpdatedT2SMap_msSR(:,:,[1 2 4]),3),[0 200],'Size',[1 3]);title('GRAPPA Subspace splitProx');colormap hot
 %%
 fgmontage(G16.im_EPTI_correct(:,:,1,11:11:end))
 fgmontage(S16.im_recon(:,:,11:11:end))
