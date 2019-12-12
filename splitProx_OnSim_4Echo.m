@@ -1,8 +1,62 @@
+%% Real data
+sTwixQ=load('/autofs/space/daisy_001/users/data/Gilad/gep_CL/meas_MID01928_FID43869_gre_4echo_24_26_G2/sTwixX.mat');
+QQ1=sTwixQ.sTwixX.image(:,:,:,:,18,:,:,:,:,:,:,:,:,:,:,:,:);
+sTwixQ2=load('/autofs/space/daisy_001/users/data/Gilad/gep_CL/meas_MID01929_FID43870_gre_4echo_37_26_G2/sTwixX.mat');
+QQ2=sTwixQ2.sTwixX.image(:,:,:,:,18,:,:,:,:,:,:,:,:,:,:,:,:);
+
+QSens=load('/autofs/space/daisy_001/users/data/Gilad/gep_CL/meas_MID01928_FID43869_gre_4echo_24_26_G2/Sens.mat');
+QSens=QSens.SensB(:,:,:,18,1);
+
+QQ1R=sTwixQ.sTwixX.refscan(:,:,:,:,18,:,:,:,:,:,:,:,:,:,:,:,:);
+QQ2R=sTwixQ2.sTwixX.refscan(:,:,:,:,18,:,:,:,:,:,:,:,:,:,:,:,:);
+
+save('ForSplitProxCart.mat','QQ1','QQ2','QSens','QQ1R','QQ2R');
+%%
+load('ForSplitProxCart.mat','QQ1','QQ2','QSens','QQ1R','QQ2R');
+[squeeze(QQ1(15,15,93+(-2:2),1)) squeeze(QQ1R(15,15,12+(-2:2),1))]
+[squeeze(QQ2(15,15,93+(-2:2),1)) squeeze(QQ2R(15,15,12+(-2:2),1))]
+QQ1(:,:,93+(-11:12),1,1,1,1,:)=QQ1R(:,:,12+(-11:12),1,1,1,1,:);
+QQ2(:,:,93+(-11:12),1,1,1,1,:)=QQ2R(:,:,12+(-11:12),1,1,1,1,:);
+DataBoth=cat(4,squeeze(QQ1),squeeze(QQ2));
+DataBoth=perm32(DataBoth(:,:,:,[1 5 2 6 3 7 4 8]));
+
+Rec1=bart('pics -m -S -R W:3:0:0.000001 ',perm43(perm84(DataBoth)),perm43(QSens));
+% 2-undersampled on dim 2 starting from index 2
+FirstEchoTime=2.4;
+TimeBetweenEchos_ms=1.3;
+nEchos=8;
+EchoTimes_ms=FirstEchoTime+TimeBetweenEchos_ms*(0:nEchos-1);
+EchoTimes_ms3=permute32(EchoTimes_ms);
+
+Sz=gsize(Rec1,1:2);
+
+Sens=perm43(QSens);
+SensMsk=grmss(Sens,3:4)>0.05;
+
+%%
+AccPerEcho=2;
+clear Msk
+for i=1:nEchos
+    disp(i);
+    Msk(:,:,i)=squeeze(bart(['poisson -Y ' num2str(Sz(2)/2) ' -Z ' num2str(1) ' -y ' num2str(AccPerEcho) ' -z ' num2str(1) ' -s ' num2str(rand*100000)]));
+end
+disp('ok Msk');
+MskR=Msk;
+Msk=zeros([1 Sz(2) nEchos]);
+Msk(1,2:2:end,:)=MskR;
+Msk(:,93+(-11:12),:)=1;
+Msk=repmat(Msk,[Sz(1) 1 1]);
+BaseSP='/autofs/cluster/kawin/Gilad/RealPois_';
+
+sig=perm43(perm74(DataBoth)).*perm73(Msk);
+SensCSMap=Sens;
+mask_sample=perm73(Msk);
+RealData=true;
 %% Sim
 if(~exist('Ma7TMPBD','var'))
     Ma7TMPBD=load('/autofs/cluster/kawin/Gilad/All_Orientation-0x.mat');
 end
-
+RealData=false;
 CurSli=permute(Ma7TMPBD.CurSetAll(:,:,:,134),[2 3 1 4]);
 
 C=CurSli(:,:,1).*exp(1i*CurSli(:,:,2));
@@ -42,7 +96,7 @@ disp('Loaded sens');
 %% Mask: Here we plan poisson sampling masks
 
 % TotalOSRatio=1.5;
-BetterThanCurrent43Ration=0.5;
+BetterThanCurrent43Ration=0.25;
 TotalOSRatio=(nEchos/3)*BetterThanCurrent43Ration; % Try easy scenario
 AccPerEcho=nEchos/TotalOSRatio;
 SigCenterSize=16;
@@ -58,6 +112,8 @@ disp('ok Msk');
 MskA=Msk;
 SigCenterSize2=16;
 Msk(Sz(1)/2+(-SigCenterSize2:SigCenterSize2),Sz(2)/2+(-SigCenterSize2:SigCenterSize2),:)=1;
+BaseSP='/autofs/cluster/kawin/Gilad/Pois_';
+Msk=squeeze(readcfl([BaseSP 'Msk']));
 %% Mask: Here is simply 6x-accelerate on PE with CAIPI over echos 
 % comment or skip this part to keep the poisson masks.
 Msk=zeros([Sz nEchos]);
@@ -65,6 +121,7 @@ Msk(:,3:6:end,1:2:end)=1;
 Msk(:,6:6:end,2:2:end)=1;
 Msk(Sz(1)/2+(-SigCenterSize2:SigCenterSize2),Sz(2)/2+(-SigCenterSize2:SigCenterSize2),:)=1;
 disp('ok Msk 3/6');
+BaseSP='/autofs/cluster/kawin/Gilad/';
 %%
 % [X Y 1 Sens CS Echos]
 CS_Dim=5;
@@ -74,8 +131,6 @@ TS_Dim=7;
 CS_Flag=2^(CS_Dim-1);
 Ch_Flag=2^(Ch_Dim-1);
 TS_Flag=2^(TS_Dim-1);
-
-BaseSP='/autofs/cluster/kawin/Gilad/';
 
 nChannels=size(Sens,Ch_Dim);
 
@@ -137,30 +192,45 @@ expTtGT = exp(TT * (1./tGT));
 GT=MmGT.*expPpGT.*expBbGT.*expTtGT;
 GTX=squeeze(sum(GT,CS_Dim));
 
-sig=bart(['linopScript ' LS_ScriptFN],ImSz16,GT,SensCSMap,mask_sample);
-
+sig=bart(['linopScript -d 5 ' LS_ScriptFN],ImSz16,GT,SensCSMap,mask_sample);
+%%
 sigFN=[BaseSP 'sig'];
-writecfl(sigFN,sig);
-
 SensFN=[BaseSP 'Sens'];
-writecfl(SensFN,SensCSMap);
-
 MskFN=[BaseSP 'Msk'];
+ksp_adjFN=[BaseSP 'ksp_adj'];
+
+writecfl(sigFN,sig);
+writecfl(SensFN,SensCSMap);
 writecfl(MskFN,mask_sample);
 
-ksp_adj=bart(['linopScript -N ' LS_ScriptFN],ImSz16,GT,SensFN,MskFN);
+if(RealData)
+    ksp_adj=bart(['linopScript -A ' LS_ScriptFN],ImSz16,sig,SensFN,MskFN);
+else
+    ksp_adj=bart(['linopScript -N ' LS_ScriptFN],ImSz16,GT,SensFN,MskFN);
+end
 disp('Produced GT and sig');
 
-ksp_adjFN=[BaseSP 'ksp_adj'];
 writecfl(ksp_adjFN,ksp_adj);
 %%
-RecA=bart(['picsS -m -S -g -R W:3:64:0.0001 ' LS_ScriptFN],ImSz16,sigFN,SensFN,MskFN);
+if(RealData)
+    RecA=bart(['picsS -m -S -g -R W:3:64:0.00000001 ' LS_ScriptFN],ImSz16,sigFN,SensFN,MskFN);
+else
+    RecA=bart(['picsS -m -S -g -R W:3:64:0.0001 ' LS_ScriptFN],ImSz16,sigFN,SensFN,MskFN);
+end
 RecA=squeeze(RecA).*SensMsk;
 [PDBase, UpdatedB0Map_Hz, UpdatedT2SMap_ms, s_vals, Fitted0, PDBase0]=...
     FitToModel_MPBD1CSf(squeeze(RecA),1:nEchos,TimeBetweenEchos_ms,FirstEchoTime);
 UpdatedT2SMap_ms=min(300,max(4,abs(UpdatedT2SMap_ms)));
 disp('ok');
-
+if(RealData)
+    PDBase0A=PDBase0;
+    PDBase0=abs(PDBase).*exp(FirstEchoTime./UpdatedT2SMap_ms).*exp(1i*angle(PDBase0A));
+%     
+%     PDBase0=PDBase0A.*(grmss(s_vals,3)>1e-4);
+%     PDBase0=exp(1i*angle(PDBase0A)).*min(abs(PDBase0),median(abs(PDBase0(abs(PDBase0)>0)))*20);
+    UpdatedT2SMap_ms=UpdatedT2SMap_ms*0+50;
+end
+%%
 DA=RecA-GTX;
 DAF=Fitted0-GTX;
 
@@ -178,13 +248,19 @@ Elem0{4}=UpdatedT2SMap_ms;% Cs=SmoothBySlices(mGT.*exp(1i*pGT),[20 20],10);
 % Elem0{3}=SmoothBySlices(bGT,[20 20],10);
 % Elem0{4}=tGT*0+50;
 %%
+ninneriterBART=[2 2 2 2];
 % ElemsAlphas=[1e-3,1e-8,1e-6,1e-4];
 % ElemsLambda=[1e-6,1e-8,1e-8,1e-6];
 ElemsAlphas=[1e-3,1e-8,1e-6,1e-4];
 ElemsLambda=[1e-6,1e-8,1e-8,1e-6];
 ElemsAlphas=[1e-3,1e-8,1e-6,1e-4];
 ElemsLambda=[1e-6,1e-3,1e-8,1e-5];
-
+if(RealData)
+    ElemsAlphas=[1e-4,1e+2,1e+2,1e+7];
+    ElemsLambda=[1e-6,1e-7,0,0];
+%     ElemsLambda=[0,0,0,0];
+    ninneriterBART=[2 2 0 2];
+end
 for i=1:numel(Elem0)
     writecfl([BaseSP 'ElemsWS_' num2str(i-1)],Elem0{i});
 end
@@ -197,7 +273,6 @@ writecfl([BaseSP 'ElemsLambda'],ElemsLambda.');
 ElementTypes=[1 2 3 4];
 writecfl([BaseSP 'ElementTypes'],ElementTypes.');
 
-ninneriterBART=[2 2 2 2];
 writecfl([BaseSP 'ninneriter'],ninneriterBART);
 disp('saved all');
 
@@ -212,12 +287,12 @@ if(ContinueRun)
         writecfl([BaseSP 'ElemsWS_' num2str(i-1)],Maps{i});
     end
 end
-%%
-QQ=bart(['splitProx -i 10000 -s 300 -d 2 -S ' ksp_adjFN ' -g -f -F ' BaseSP ' ' LS_ScriptFN],ImSz16,1,SensFN,MskFN);
+%
+QQ=bart(['splitProx -i 10000 -s 30 -d 2 -S ' ksp_adjFN ' -g -f -F ' BaseSP ' ' LS_ScriptFN],ImSz16,1,SensFN,MskFN);
 %%
 ErrVec=readcfl([BaseSP 'ErrVec']);
 ErrVec=ErrVec(1:(find(ErrVec<1,1))-1);
-figure;plot(ErrVec)
+% figure;plot(ErrVec)
 %
 Maps=cell(1,4);
 for i=1:4
@@ -229,12 +304,31 @@ expPp = exp(P * Maps{2});
 expBb = exp(B * Maps{3});
 expTt = exp(TT * (1./Maps{4}));
 
+% Maps10k=Maps;
+
 Rec=Mm.*expPp.*expBb.*expTt;
 RecX=squeeze(sum(Rec,CS_Dim));
+fgmontagex(RecX)
+%%
+DA=abs(RecA)-abs(squeeze(Rec1));
+DX=abs(RecX)-abs(squeeze(Rec1));
 
+ErrShowFac=10;
+QQ=cat(4,squeeze(Rec1),squeeze(RecA),squeeze(RecX),abs(DA)*ErrShowFac,abs(DX)*ErrShowFac);
+
+%%
 DX=RecX-GTX;
 
 StepBRes=cat(4,GTX,RecA,RecX,DA*ErrShowFac,DAF*ErrShowFac,DX*ErrShowFac);
 fgmontagex(StepBRes,[0 1e3]);title(num2str([grmss(DA) grmss(DAF) grmss(DX)],' %.2f '));
 
-fgmontagex(StepBRes(:,:,1,:),[0 1e3]);title(num2str([grmss(DA) grmss(DAF) grmss(DX)],' %.2f '));
+% ErrShowFac=5;
+StepBRes=cat(4,RecA,RecX,DA*ErrShowFac,DX*ErrShowFac);
+fgmontagex(mean(abs(StepBRes),3),[0 1e3],'Size',[2 2]);
+
+DBase=GTX-gmean(GTX);
+Denom=norm(DBase(:));
+NRMSEA=norm(DA(:))./Denom;
+NRMSEX=norm(DX(:))./Denom;
+%%
+fgmontagex(StepBRes(:,:,3,:),[0 1e3]);title(num2str([grmss(DA) grmss(DAF) grmss(DX)],' %.2f '));
